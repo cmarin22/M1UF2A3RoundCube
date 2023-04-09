@@ -38,9 +38,9 @@ if [ $(whoami) == "root" ]; then
         echo -e "${VERDE} Ets root. Tot està bé.${NORMAL}"
         # Color verd
 else
-        echo "${ROJO}No ets root. Aquest fitxer és condifencial.${BLANCO}"
+        echo "${ROJO} No ets root. Aquest fitxer és condifencial. ${BLANCO}"
         # Color vermell
-        echo "${ROJOBK}No tens permisos per executar aquest script, només pots ser executat per l'usuari root.${NORMAL}"
+        echo "${ROJOBK} No tens permisos per executar aquest script, només pots ser executat per l'usuari root. ${BLANCO}"
         # Fons vermell
         # Exit fa que sortim de l'script.
         exit
