@@ -30,7 +30,7 @@ PURPURABK='\e[45m'
 CIANBK='\e[46m'
 GRISBK='\e[47m'
 
-# Reset
+# Reset 
 Color_Off='\033[0m'       # Text Reset
 
 # Regular Colors
