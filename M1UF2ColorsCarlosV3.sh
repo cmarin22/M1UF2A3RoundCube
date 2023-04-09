@@ -77,6 +77,7 @@ On_IPurple='\033[0;105m'  # Purple
 On_ICyan='\033[0;106m'    # Cyan
 On_IWhite='\033[0;107m'   # White
 
+echo -e "${On_IRed}${BIBlue}                              AUTOR: CARLOS MARÍN                                             ${Color_Off}"
 #Comprovació de l’usuari
 #Aquest condicional utilitza la comanda “whoami”, serveix per identificar l’usuari actual
 #Compara la variable si es == a “root” en cas afirmatiu escriu “Ets root.” i en cas negatiu et diu que no ho ets i surt de l’script
@@ -94,7 +95,7 @@ else
         exit
 fi
 echo -e "${On_IPurple}                              DO NOT TRY                                                            ${On_IBlack}"
-echo -e "${IBlue}              XX 		          XX      XX                                                      ${IBlack}"
+echo -e "${IBlue}              XX                         XX      XX                                                      ${IBlack}"
 echo -e "${IBlue}           XXXXX XXXXXX  XXXXX  XXXXXX XXXXXX  XXXXXX XX XX XX  XX                                       ${IBlack}"
 echo -e "${IBlue}          XX  XX XX  XX  XX  XX XX  XX   XX      XX   XXX    XXXX                                        ${IBlack}"
 echo -e "${IBlue}           XXXXX XXXXXX  XX  XX XXXXXX   XXXX    XXXX XX      XX                                         ${IBlack}"
