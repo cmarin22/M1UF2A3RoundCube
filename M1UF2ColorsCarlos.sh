@@ -100,7 +100,7 @@ echo -e "${IBlue}          XX    XX XX    XX    XX     XX XX    XX   XX        X
 echo -e "${IBlue}           XXXXXXX XXXXXXXX    XX     XX XXXXXXXX   XXXXXX    XXXXXX XX           XXX         XXXXXX XX    XX XX  XXXXXXX                                      ${IBlack}"
 echo -e "${IBlue}                                                                                  XXX                                                                          ${IBlack}"
 echo -e "${IBlue}                                                                                  XXX                                                                          ${IBlack}" 
-echo -r "${On_IPurple}                                                                                                                                                       ${On_IBlack}"
+echo -e "${On_IPurple}                                                                                                                                                       ${On_IBlack}"
 echo -e "${IRed}                      XX        XX                                     XX                                                                                       ${IBlack}"
 echo -e "${IRed}                    XXXXXX      XX                                     XX                                                                                       ${IBlack}"
 echo -e "${IRed}            XXXXXX    XX        XXXXXXX  XXXXXXXX XXXXXXXX XXXXXXXX    XX                                                                                       ${IBlack}"
@@ -110,7 +110,7 @@ echo -e "${IRed}           XX    XX   XX        XX    XX XX    XX XX XX XX XX   
 echo -e "${IRed}            XXXXXXX   XXXXXX    XX    XX XXXXXXXX XX XX XX XXXXXXXX    XX                                                                                       ${IBlack}"
 echo -e "${IRed}                                                                                                                                                                ${IBlack}"
 echo -e "${IRed}                                                                       XX                                                                                       ${IBlack}"
-echo -r "${On_IPurple}                                                                                                                                                       ${On_IBlack}"
+echo -e "${On_IPurple}                                                                                                                                                       ${On_IBlack}"
 
 echo -e "${BIGreen}GRÀCIES A STACKOVERFLOW PELS COLORS.${On_Black}"
 echo -e "${BIGreen}Colors disponibles a: https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux.${On_Black}"
