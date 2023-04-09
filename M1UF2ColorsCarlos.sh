@@ -2,33 +2,7 @@
 clear
 # Amb netegem el terminal
 
-# Colors lletres
-BLANCO='\e[0m'
-NEGRO='\e[30m'
-ROJO='\e[31m'
-ROJOCLARO='\e[1;31m'
-VERDE='\e[32m'
-VERDECLARO='\e[1;32m'
-MARRON='\e[33m'
-AZUL='\e[34m'
-AZULCLARO='\e[1;34m'
-PURPURA='\e[35m'
-PURPURACLARO='\e[1;35m'
-CIAN='\e[36m'
-GRIS='\e[37m'
-GRISCLARO='\e[1;30m'
-AMARILLO='\e[1;33m'
-LILA='\e[1;36m'
-
-# Colores de fondo
-NEGROBK='\e[40m'
-ROJOBK='\e[41m'
-VERDEBK='\e[42m'
-MARRONBK='\e[43m'
-AZULBK='\e[44m'
-PURPURABK='\e[45m'
-CIANBK='\e[46m'
-GRISBK='\e[47m'
+# Color obtinguts a: https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux
 
 # Reset 
 Color_Off='\033[0m'       # Text Reset
@@ -103,26 +77,23 @@ On_IPurple='\033[0;105m'  # Purple
 On_ICyan='\033[0;106m'    # Cyan
 On_IWhite='\033[0;107m'   # White
 
-
-
 #Comprovació de l’usuari
 #Aquest condicional utilitza la comanda “whoami”, serveix per identificar l’usuari actual
 #Compara la variable si es == a “root” en cas afirmatiu escriu “Ets root.” i en cas negatiu et diu que no ho ets i surt de l’script
 if [ $(whoami) == "root" ]; then
-        echo -e "${Red}Ets root. Tot està bé.${White}"
+        echo -e "${Red}ETS. TOT ESTÀ BÉ.${White}"
         # Color verd
 else
-        echo "${Red}No ets root. Aquest fitxer és condifencial.${White}"
-        # Color vermell
-        echo "${Red}No tens permisos per executar aquest script, només pots ser executat per l'usuari root.${White}"
+        echo "${On_Yellow}${Red}NO ETS ROOT. AQUEST FITXER ÉS CONFIDENCIAL.${White}${On_Black}"
+        # Fons groc, color vermell
+        echo "${On_IPurple}${Red}SI US PLAU, AVISA A L'ADMINISTRADOR QUE HI HA UNA ESCLETXA DE SEGURETAT.${White}${On_IBlack}"
         # Fons vermell
         # Exit fa que sortim de l'script.
         exit
 fi
-
-
- 
-
+echo -e "${IBlue}          X                                                                                                             ${IBlack}"
+echo -e "${BIGreen}GRÀCIES A STACKOVERFLOW PELS COLORS.${On_Black}"
+echo -e "${BIGreen}Colors disponibles a: https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux.${On_Black}"
 
 
 
