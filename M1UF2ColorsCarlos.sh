@@ -111,7 +111,6 @@ echo -e "${IRed}            XXXXXXX   XXXXXX    XX    XX XXXXXXXX XX XX XX XXXXX
 echo -e "${IRed}                                                                                                                                                                ${IBlack}"
 echo -e "${IRed}                                                                       XX                                                                                       ${IBlack}"
 echo -e "${On_IPurple}                                                                                                                                                       ${On_IBlack}"
-
 echo -e "${BIGreen}GRÀCIES A STACKOVERFLOW PELS COLORS.${On_Black}"
 echo -e "${BIGreen}Colors disponibles a: https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux.${On_Black}"
 
