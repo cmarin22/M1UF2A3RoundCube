@@ -81,8 +81,10 @@ On_IWhite='\033[0;107m'   # White
 #Aquest condicional utilitza la comanda “whoami”, serveix per identificar l’usuari actual
 #Compara la variable si es == a “root” en cas afirmatiu escriu “Ets root.” i en cas negatiu et diu que no ho ets i surt de l’script
 if [ $(whoami) == "root" ]; then
-        echo -e "${Red}ETS. TOT ESTÀ BÉ.${White}"
-        # Color verd 
+        echo -e "${BIGreen}ETS ROOT. TOT ESTÀ BÉ.${White}"
+        # Color verd
+        echo -e "${On_Yellow}${URed}ETS ROOT. TOT ESTÀ BÉ.${UBlack}${On_Black}"
+        echo -e "${BPurple}AIXÒ NO HA FACIS A CASA TEVA!${Color_Off}"
 else
         echo "${On_Yellow}${Red}NO ETS ROOT. AQUEST FITXER ÉS CONFIDENCIAL.${White}${On_Black}"
         # Fons groc, color vermell
@@ -91,23 +93,21 @@ else
         # Exit fa que sortim de l'script.
         exit
 fi
-echo -e "${IBlue}              XX 		                  XX      XX                                                                   ${IBlack}"
-echo -e "${IBlue}           XXXXX XXXXXX  XXXXX  XXXXXX XXXXXX  XXXXXX XX XX XX  XX                                                    ${IBlack}"
-echo -e "${IBlue}          XX  XX XX  XX  XX  XX XX  XX   XX      XX   XXX    XXXX                                                     ${IBlack}"
-echo -e "${IBlue}           XXXXX XXXXXX  XX  XX XXXXXX   XXXX    XXXX XX      XX                                       		       ${IBlack}"
-echo -e "${IBlue}                                                              XX                                       			   ${IBlack}"
-echo -e "${IBlue}                                                              XX                                                      ${IBlack}"
-echo -e "${On_IPurple}                                                                                                            \n${On_IBlack}"
-echo -e "${IBlue}            XX   XX     ++  XXXX   XXXX     XX    XX                   XXXXXX  XX                                     ${IBlack}"
-echo -e "${IBlue}          XXXXXX XXXXXX XX XXX       XXXX XXXXXX  XXXXXX XXXXXX XXXXX  XX  XX  XX                                     ${IBlack}"
-echo -e "${IBlue}            XX   XX  XX XX    XXX  XX  XX   XX    XX  XX XX  XX X X XX XXXX    XX                                     ${IBlack}"
-echo -e "${IBlue}            XXXX XX  XX XX  XXXX    XXXXX   XXXX  XX  XX XXXXXX X X XX XXXXXX  XX                                     ${IBlack}"
-echo -e "${IBlue}                                                                                                                      ${IBlack}"
-echo -e "${IBlue}                                                              					++                                     ${IBlack}"
-echo -e "${On_IPurple}                                                                                                            \n${On_IBlack}"
-echo -e "${BIGreen}GRÀCIES A STACKOVERFLOW PELS COLORS.${On_Black}"
+echo -e "${IBlue}              XX 		                  XX      XX                                              ${IBlack}"
+echo -e "${IBlue}           XXXXX XXXXXX  XXXXX  XXXXXX XXXXXX  XXXXXX XX XX XX  XX                                       ${IBlack}"
+echo -e "${IBlue}          XX  XX XX  XX  XX  XX XX  XX   XX      XX   XXX    XXXX                                        ${IBlack}"
+echo -e "${IBlue}           XXXXX XXXXXX  XX  XX XXXXXX   XXXX    XXXX XX      XX                                         ${IBlack}"
+echo -e "${IBlue}                                                              XX                                         ${IBlack}"
+echo -e "${IBlue}                                                              XX                                         ${IBlack}"
+echo -e "${On_IPurple}                                                                                               \n${On_IBlack}"
+echo -e "${IBlue}            XX   XX     ++  XXXX   XXXX     XX    XX                   XXXXXX  XX                        ${IBlack}"
+echo -e "${IBlue}          XXXXXX XXXXXX XX XXX       XXXX XXXXXX  XXXXXX XXXXXX XXXXX  XX  XX  XX                        ${IBlack}"
+echo -e "${IBlue}            XX   XX  XX XX    XXX  XX  XX   XX    XX  XX XX  XX X X XX XXXX    XX                        ${IBlack}"
+echo -e "${IBlue}            XXXX XX  XX XX  XXXX    XXXXX   XXXX  XX  XX XXXXXX X X XX XXXXXX  XX                        ${IBlack}"
+echo -e "${IBlue}                                                                                                         ${IBlack}"
+echo -e "${IBlue}                                                              			++                        ${IBlack}"
+echo -e "${On_IPurple}                                                                                                 ${On_IBlack}"
+echo -e "${BIGreen}GRÀCIES A STACKOVERFLOW PELS COLORS.                                                                 ${On_Black}"
 echo -e "${BIGreen}Colors disponibles a: https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux.${On_Black}"
-
-
 
 # Fi codi
