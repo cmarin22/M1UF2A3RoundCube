@@ -93,22 +93,22 @@ else
         # Exit fa que sortim de l'script.
         exit
 fi
-echo -e "${On_IPurple}                              DO NOT TRY                                                         ${On_IBlack}"
-echo -e "${IBlue}              XX 		                  XX      XX                                              ${IBlack}"
+echo -e "${On_IPurple}                              DO NOT TRY                                                            ${On_IBlack}"
+echo -e "${IBlue}              XX 		          XX      XX                                                      ${IBlack}"
 echo -e "${IBlue}           XXXXX XXXXXX  XXXXX  XXXXXX XXXXXX  XXXXXX XX XX XX  XX                                       ${IBlack}"
 echo -e "${IBlue}          XX  XX XX  XX  XX  XX XX  XX   XX      XX   XXX    XXXX                                        ${IBlack}"
 echo -e "${IBlue}           XXXXX XXXXXX  XX  XX XXXXXX   XXXX    XXXX XX      XX                                         ${IBlack}"
 echo -e "${IBlue}                                                              XX                                         ${IBlack}"
 echo -e "${IBlue}                                                              XX                                         ${IBlack}"
-echo -e "${On_IPurple}                             THIS AT HOME!                                                       ${On_IBlack}"
+echo -e "${On_IPurple}                             THIS AT HOME!                                                          ${On_IBlack}"
 echo -e "${IBlue}            XX   XX     ++  XXXX   XXXX     XX    XX                   XXXXXX  XX                        ${IBlack}"
 echo -e "${IBlue}          XXXXXX XXXXXX XX XXX       XXXX XXXXXX  XXXXXX XXXXXX XXXXX  XX  XX  XX                        ${IBlack}"
 echo -e "${IBlue}            XX   XX  XX XX    XXX  XX  XX   XX    XX  XX XX  XX X X XX XXXX    XX                        ${IBlack}"
 echo -e "${IBlue}            XXXX XX  XX XX  XXXX    XXXXX   XXXX  XX  XX XXXXXX X X XX XXXXXX  XX                        ${IBlack}"
 echo -e "${IBlue}                                                                                                         ${IBlack}"
 echo -e "${IBlue}                                                              			++                        ${IBlack}"
-echo -e "${On_IPurple}                           FI DEL MISSATGE.                                                      ${On_IBlack}"
-echo -e "${BIGreen}GRÀCIES A STACKOVERFLOW PELS COLORS.                                                                 ${On_Black}"
+echo -e "${On_IPurple}                           FI DEL MISSATGE.                                                         ${On_IBlack}"
+echo -e "${BIGreen}GRÀCIES A STACKOVERFLOW PELS COLORS.                                                                   ${On_Black}"
 echo -e "${BIGreen}Colors disponibles a: https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux.${On_Black}"
 
 # Fi codi
