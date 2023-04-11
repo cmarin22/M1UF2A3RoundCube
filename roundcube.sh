@@ -7,7 +7,7 @@ NORMAL = '\e[0m'
 ROJO = '\e[31m'
 VERDE = '\e[32m'
 ROJOBK = '\e[41m'
-
+ 
 
 #Comprovació de l’usuari
 #Aquest condicional utilitza la comanda “whoami”, serveix per identificar l’usuari actual
