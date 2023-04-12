@@ -45,8 +45,8 @@ fi
 
 #Instal.lació paquet MariaDB-Server
 if [ $(dpkg-query -W -f='${Status}' 'mariadb-server' 2>/dev/null | grep -c "ok installed") -eq 0 ];then 
-        echo "MariaDB-Server no està instal.lat" >>/script/registre.txt
-        echo "MariaDB-Server no està instal.lat"
+        echo "MariaDB-Server no està instal·lat" >>/script/registre.txt
+        echo "MariaDB-Server no està instal·lat"
         apt-get -y install mariadb-server >/dev/null 2>&1
         if [ $? -eq 0 ];then
                 echo "MariaDB-Server instal·lat correctament." >>/script/registre.txt
@@ -56,9 +56,10 @@ if [ $(dpkg-query -W -f='${Status}' 'mariadb-server' 2>/dev/null | grep -c "ok i
                 echo -e "${ROJO}MariaDB-Server no s'ha instal·lat.${NORMAL}"
                 exit
         fi
-#else
-#       echo "MariaDB-Server ja està instal.lat"
-#fi
+else
+       echo -e "${VERDE}MariaDB-Server ja està instal·lat.${NORMAL}" >>/script/registre.txt
+       echo -e "${VERDE}MariaDB-Server ja està instal·lat.${NORMAL}"
+fi
 
 #Instal.lació paquet PHP
 if [ $(dpkg-query -W -f='${Status}' 'php' 2>/dev/null | grep -c "ok installed") -eq 0 ];then
@@ -75,6 +76,7 @@ if [ $(dpkg-query -W -f='${Status}' 'php' 2>/dev/null | grep -c "ok installed") 
                 exit
         fi
 else
+        echo -e "${VERDE}PHP ja està instal·lat.${NORMAL}" >>/script/registre.txt
         echo -e "${VERDE}PHP ja està instal·lat.${NORMAL}"
 fi
 
@@ -95,9 +97,10 @@ if [ $(dpkg-query -W -f='${Status}' 'php-mysql' 2>/dev/null | grep -c "ok instal
                 echo -e "${ROJO}PHP-MySQL no s'ha instal·lat.${NORMAL}"
                 exit
         fi
-#else
-#       echo -e "${VERDE}PHP-MySQL ja està instal·lat.${NORMAL}"
-#fi
+else
+        echo -e "${VERDE}PHP-MySQL ja està instal·lat.${NORMAL}" >>/script/registre.txt
+        echo -e "${VERDE}PHP-MySQL ja està instal·lat.${NORMAL}"
+fi
 
 # PART 2 - BASE DE DADES ################################################################################
 #Comprovem si la base de dades roundcube existeix
