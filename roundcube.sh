@@ -28,36 +28,54 @@ fi
 #Instal.lació paquet Apache2
 if [ $(dpkg-query -W -f='${Status}' 'apache2' | grep -c "ok installed") -eq 0 ];then
 # Si no trobem Apache2, avisem que no està instal·lat
-        echo "Apache2 no està instal.lat" >>/script/registre.txt
-        echo "Apache2 no està instal.lat"
+        echo "Apache2 no està instal·lat" >>/script/registre.txt
+        echo "Apache2 no està instal·lat"
         apt-get -y install apache2 >/dev/null 2>&1
         if [ $? -eq 0 ];then
                 echo "Apache2 instal.lat correctament." >>/script/registre.txt
                 echo -e "${VERDE}Apache2 instal·lat correctament.${NORMAL}"
         else
-                echo -e "${ROJO}Apache2 instal.lat incorrectament.${NORMAL}"
+                echo -e "${ROJO}Apache2 no s'ha instal·lat.${NORMAL}"
                 exit
         fi
 else
-        echo "Apache2 ja està instal.lat"
+        echo -e "${VERDE}Apache2 ja està instal.lat.${NORMAL}"
 fi
 
 #Instal.lació paquet MariaDB-Server
-if [ $(dpkg-query -W -f='${Status}' 'mariadb-server' | grep -c "ok installed") -eq 0 ];then 
+#if [ $(dpkg-query -W -f='${Status}' 'mariadb-server' | grep -c "ok installed") -eq 0 ];then 
 # No podem trobar el paquet 'mariadb-server' amb $(dpkg-query -W -f='${Status}' 'mariadb-server'
-        echo "MariaDB-Server no està instal.lat" >>/script/registre.txt
+#        echo "MariaDB-Server no està instal.lat" >>/script/registre.txt
+# Com que no podem comprovar si està instal·lat o no MariaDB-Server, l'instal·larem i si no hi ha errors, 
+# voldrar dir que s'ha instal·lat encara que podria ja estar instal·lat abans.
         apt-get -y install apache2 >/dev/null 2>&1
         if [ $? -eq 0 ];then
                 echo "MariaDB-Server instal·lat correctament." >>/script/registre.txt
                 echo -e "${VERDE}MariaDB-Server instal·lat correctament.${NORMAL}"
         else
-                echo -e "${ROJO}Apache2 instal.lat incorrectament.${NORMAL}"
+                echo -e "${ROJO}MariaDB-Server no s'ha instal·lat.${NORMAL}"
+                exit
+        fi
+#else
+#        echo "MariaDB-Server ja està instal.lat"
+#fi
+
+#Instal.lació paquet PHP
+if [ $(dpkg-query -W -f='${Status}' 'php' | grep -c "ok installed") -eq 0 ];then
+# Si no trobem Apache2, avisem que no està instal·lat
+        echo "PHP no està instal·lat" >>/script/registre.txt
+        echo "PHP no està instal·lat"
+        apt-get -y install php >/dev/null 2>&1
+        if [ $? -eq 0 ];then
+                echo "PHP instal·lat correctament." >>/script/registre.txt
+                echo -e "${VERDE}PHP instal·lat correctament.${NORMAL}"
+        else
+                echo -e "${ROJO}PHP no s'ha instal·lat.${NORMAL}"
                 exit
         fi
 else
-        echo "MariaDB-Server ja està instal.lat"
+        echo -e "${ROJO}PHP ja està instal·lat.${NORMAL}"
 fi
-
 
 
 
