@@ -7,7 +7,8 @@ NORMAL='\e[0m'
 ROJO='\e[31m'
 VERDE='\e[32m'
 ROJOBK='\e[41m'
- 
+
+# PART 0 - COMPROVAR QUE SOM L'USUARI ROOT
 echo "SCRIPT AUTOMÀTIC PER INSTAL·LAR EL SERVIDOR ROUNDCUBE"
 #Comprovació de l’usuari
 #Aquest condicional utilitza la comanda “whoami”, serveix per identificar l’usuari actual
@@ -24,6 +25,7 @@ else
         exit
 fi
 
+# PART 1 - PAQUET LAMP
 #Instal.lació paquet Apache2
 if [ $(dpkg-query -W -f='${Status}' 'apache2' | grep -c "ok installed") -eq 0 ];then
 # Si no trobem Apache2, avisem que no està instal·lat
@@ -97,19 +99,28 @@ fi
 #       echo -e "${VERDE}PHP-MySQL ja està instal·lat.${NORMAL}"
 #fi
 
+# PART 2 - BASE DE DADES
 #Comprovem si la base de dades roundcube existeix
 dbname="roundcube"
 if [ -d "/var/lib/mysql/$dbname" ]; then
-        echo -e "${VERDE}La base de dades roundcube existeix${NORMAL}"
+        echo -e "${VERDE}La base de dades roundcube existeix.${NORMAL}"
 else
-        echo -e "${ROJO}La base de dades no existeix${NORMAL}"
+        echo -e "${ROJO}La base de dades no existeix.${NORMAL}"
         mysql -u root -e "CREATE DATABASE roundcube;"
         mysql -u root -e "CREATE USER 'roundcube'@'localhost' IDENTIFIED BY 'roundcube';"
         mysql -u root -e "GRANT ALL PRIVILEGES ON moodle .* TO 'roundcube'@'localhost';"
         mysql -u root -e "FLUSH PRIVILEGES;"
         mysql -u root -e "exit"
-        echo -e "${VERDE}La base de dades roundcube s'ha creat correctament${NORMAL}"
+        
 fi
 
-
+# Tornem a comprovar si existeix per assegurar-nos que s'ha creat.
+if [ -d "/var/lib/mysql/$dbname" ]; then
+        echo -e "${VERDE}La base de dades roundcube s'ha creat correctament.${NORMAL}"
+else
+        echo -e "${ROJO}Malauradament, la base de dades no s'ha creat correctament.${NORMAL}"
+        exit
+fi
 # Fi codi
+
+# PART 3 - DEPENDÈNCIES DE PHP
