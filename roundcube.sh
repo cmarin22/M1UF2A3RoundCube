@@ -27,7 +27,7 @@ fi
 
 # PART 1 - PAQUET LAMP ################################################################################
 #Instal.lació paquet Apache2
-if [ $(dpkg-query -W -f='${Status}' 'apache2' | grep -c "ok installed") -eq 0 ];then
+if [ $(dpkg-query -W -f='${Status}' 'apache2' 2>/dev/null | grep -c "ok installed") -eq 0 ];then
 # Si no trobem Apache2, avisem que no està instal·lat
         echo "Apache2 no està instal·lat." >>/script/registre.txt
         echo "Apache2 no està instal·lat."
@@ -44,16 +44,15 @@ else
 fi
 
 #Instal.lació paquet MariaDB-Server
-#if [ $(dpkg-query -W -f='${Status}' 'mariadb-server' | grep -c "ok installed") -eq 0 ];then 
-# No podem trobar el paquet 'mariadb-server' amb $(dpkg-query -W -f='${Status}' 'mariadb-server'
-#        echo "MariaDB-Server no està instal.lat" >>/script/registre.txt
-# Com que no podem comprovar si està instal·lat o no MariaDB-Server, l'instal·larem i si no hi ha errors, 
-# voldrar dir que s'ha instal·lat encara que podria ja estar instal·lat abans.
+if [ $(dpkg-query -W -f='${Status}' 'mariadb-server' 2>/dev/null | grep -c "ok installed") -eq 0 ];then 
+        echo "MariaDB-Server no està instal.lat" >>/script/registre.txt
+        echo "MariaDB-Server no està instal.lat"
         apt-get -y install mariadb-server >/dev/null 2>&1
         if [ $? -eq 0 ];then
                 echo "MariaDB-Server instal·lat correctament." >>/script/registre.txt
                 echo -e "${VERDE}MariaDB-Server instal·lat correctament.${NORMAL}"
         else
+                echo -e "${ROJO}MariaDB-Server no s'ha instal·lat.${NORMAL}" >>/script/registre.txt
                 echo -e "${ROJO}MariaDB-Server no s'ha instal·lat.${NORMAL}"
                 exit
         fi
@@ -62,7 +61,7 @@ fi
 #fi
 
 #Instal.lació paquet PHP
-if [ $(dpkg-query -W -f='${Status}' 'php' | grep -c "ok installed") -eq 0 ];then
+if [ $(dpkg-query -W -f='${Status}' 'php' 2>/dev/null | grep -c "ok installed") -eq 0 ];then
 # Si no trobem PHP, avisem que no està instal·lat
         echo "PHP no està instal·lat." >>/script/registre.txt
         echo "PHP no està instal·lat."
@@ -80,10 +79,11 @@ else
 fi
 
 #Instal.lació paquet PHP-MySQL
-# if [ $(dpkg-query -W -f='${Status}' 'php-mysql' | grep -c "ok installed") -eq 0 ];then
+if [ $(dpkg-query -W -f='${Status}' 'php-mysql' 2>/dev/null | grep -c "ok installed") -eq 0 ];then
 # No podem trobar el paquet 'php-mysql' amb $(dpkg-query -W -f='${Status}' 'mariadb-server'
 # Si no trobem PHP-MYSQL, avisem que no està instal·lat
-#       echo "PHP-MySQL no està instal·lat." >>/script/registre.txt
+        echo "PHP-MySQL no està instal·lat." >>/script/registre.txt
+        echo "PHP-MySQL no està instal·lat."
 # Com que no podem comprovar si està instal·lat o no PHP-MySQL, l'instal·larem i si no hi ha errors, 
 # voldrar dir que s'ha instal·lat encara que podria ja estar instal·lat abans.
         apt-get -y install php-mysql >/dev/null 2>&1
