@@ -47,7 +47,7 @@ fi
 #        echo "MariaDB-Server no està instal.lat" >>/script/registre.txt
 # Com que no podem comprovar si està instal·lat o no MariaDB-Server, l'instal·larem i si no hi ha errors, 
 # voldrar dir que s'ha instal·lat encara que podria ja estar instal·lat abans.
-        apt-get -y install apache2 >/dev/null 2>&1
+        apt-get -y install mariadb-server >/dev/null 2>&1
         if [ $? -eq 0 ];then
                 echo "MariaDB-Server instal·lat correctament." >>/script/registre.txt
                 echo -e "${VERDE}MariaDB-Server instal·lat correctament.${NORMAL}"
