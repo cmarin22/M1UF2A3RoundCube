@@ -100,15 +100,15 @@ fi
 #Comprovem si la base de dades roundcube existeix
 dbname="roundcube"
 if [ -d "/var/lib/mysql/$dbname" ]; then
-        echo "${VERDE}La base de dades roundcube existeix${NORMAL}"
+        echo -e "${VERDE}La base de dades roundcube existeix${NORMAL}"
 else
-        echo "${ROJO}La base de dades no existeix${NORMAL}"
+        echo -e "${ROJO}La base de dades no existeix${NORMAL}"
         mysql -u root -e "CREATE DATABASE roundcube;"
         mysql -u root -e "CREATE USER 'roundcube'@'localhost' IDENTIFIED BY 'roundcube';"
         mysql -u root -e "GRANT ALL PRIVILEGES ON moodle .* TO 'roundcube'@'localhost';"
         mysql -u root -e "FLUSH PRIVILEGES;"
         mysql -u root -e "exit"
-        echo "${VERDE}La base de dades roundcube s'ha creat correctament${NORMAL}"
+        echo -e "${VERDE}La base de dades roundcube s'ha creat correctament${NORMAL}"
 fi
 
 
