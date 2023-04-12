@@ -73,7 +73,7 @@ if [ $(dpkg-query -W -f='${Status}' 'php' | grep -c "ok installed") -eq 0 ];then
                 exit
         fi
 else
-        echo -e "${ROJO}PHP ja està instal·lat.${NORMAL}"
+        echo -e "${VERDE}PHP ja està instal·lat.${NORMAL}"
 fi
 
 #Instal.lació paquet PHP-MySQL
@@ -90,7 +90,7 @@ if [ $(dpkg-query -W -f='${Status}' 'php-mysql' | grep -c "ok installed") -eq 0 
                 exit
         fi
 else
-        echo -e "${ROJO}PHP-MySQL ja està instal·lat.${NORMAL}"
+        echo -e "${VERDE}PHP-MySQL ja està instal·lat.${NORMAL}"
 fi
 
 
