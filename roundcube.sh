@@ -151,6 +151,52 @@ else
         exit
 fi
 
+# PART 5 - CANVI DE PERMISOS ################################################################################
+# Esborrar contingut al directori html
+rm -r /var/www/html/* 2>/dev/null
+if [ $? -eq 0 ];then
+        echo "Contingut del directori html esborrat correctament." >>/script/registre.txt
+        echo -e "${VERDE}Contingut del directori html esborrat correctament.${NORMAL}"
+else
+        echo  "El contingut del directori html no s'ha pogut esborrar.">>/script/registre.txt
+        echo -e "${ROJO}El contingut del directori html no s'ha pogut esborrar.${NORMAL}"
+        exit
+fi
+# Assignar permisos a www-data
+chown -R www-data:www-data /var/www/html/ 2>/dev/null
+if [ $? -eq 0 ];then
+        echo "Permisos assignats a www-data correctament." >>/script/registre.txt
+        echo -e "${VERDE}Permisos assignats a www-data correctament.${NORMAL}"
+else
+        echo  "Els permisos no s'han assignat a www-data correctament.">>/script/registre.txt
+        echo -e "${ROJO}Els permisos no s'han assignat a www-data correctament.${NORMAL}"
+        exit
+fi
+# Moure el contingut de RoundCube al directori html
+mv roundcubemail-1.6.1/* /var/www/html/ 2>/dev/null
+if [ $? -eq 0 ];then
+        echo "Contigut de RoundCube mogut al directori html correctament." >>/script/registre.txt
+        echo -e "${VERDE}Contigut de RoundCube mogut al directori html correctament.${NORMAL}"
+else
+        echo  "El contigut de RoundCube no s'ha mogut al directori html correctament.">>/script/registre.txt
+        echo -e "${ROJO}El contigut de RoundCube no s'ha mogut al directori html correctament.${NORMAL}"
+        exit
+fi
+# Assignar permisos a tot el directori html
+chmod -R 755 /var/www/html/ 2>/dev/null
+if [ $? -eq 0 ];then
+        echo "Permisos assignats a tot el directori html correctament." >>/script/registre.txt
+        echo -e "${VERDE}Permisos assignats a tot el directori html correctament.${NORMAL}"
+else
+        echo  "No s'han assignat els permisos al directori html correctament.">>/script/registre.txt
+        echo -e "${ROJO}No s'han assignat els permisos al directori html correctament.${NORMAL}"
+        exit
+fi
+           
+                
+                
+                
+
 
 
 
