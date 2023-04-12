@@ -64,7 +64,32 @@ echo “deb https://packages.sury.org/php/ $( lsb_release -sc) main” | tee /et
                 exit
         fi
         
-#apt-get update
-#apt-get install php7.4
-#a2dismod php7.3
-#a2enmod php7.4
+apt-get update >/dev/null 2>&1
+apt-get install php7.4 >/dev/null 2>&1
+        if [ $? -eq 0 ];then
+                echo "Instal.lant la versio 7.4 de php" >>/script/registre.txt
+                echo -e "${VERDE}Instal.lant la versio 7.4 de php.${NORMAL}"
+        else
+                echo -e "${ROJO}ERROR d'actualització 3.${NORMAL}" >>/script/registre.txt
+                echo -e "${ROJO}ERROR d'actualització 3.${NORMAL}"
+                exit
+        fi
+a2dismod php7.3
+        if [ $? -eq 0 ];then
+                echo "Deshabilitant la versio 7.3 de php" >>/script/registre.txt
+                echo -e "${VERDE}Desabilitant la versio 7.3 de php.${NORMAL}"
+        else
+                echo -e "${ROJO}ERROR d'actualització 4.${NORMAL}" >>/script/registre.txt
+                echo -e "${ROJO}ERROR d'actualització 4.${NORMAL}"
+                exit
+        fi
+a2enmod php7.4
+        if [ $? -eq 0 ];then
+                echo "Habilitant la versio 7.4 de php" >>/script/registre.txt
+                echo -e "${VERDE}Habilitant la versio 7.4 de php.${NORMAL}"
+        else
+                echo -e "${ROJO}ERROR d'actualització 5.${NORMAL}" >>/script/registre.txt
+                echo -e "${ROJO}ERROR d'actualització 5.${NORMAL}"
+                exit
+        fi
+        
