@@ -44,6 +44,7 @@ fi
 
 #Instal.lació paquet MariaDB-Server
 if [ $(dpkg-query -W -f='${Status}' 'mariadb-server' | grep -c "ok installed") -eq 0 ];then 
+# No podem trobar el paquet 'mariadb-server' amb $(dpkg-query -W -f='${Status}' 'mariadb-server'
         echo "MariaDB-Server no està instal.lat" >>/script/registre.txt
         apt-get -y install apache2 >/dev/null 2>&1
         if [ $? -eq 0 ];then
