@@ -18,7 +18,7 @@ else
 fi
 
 #Instal.lació paquet PHP-MySQL
-# if [ $(dpkg-query -W -f='${Status}' 'php-mysql' | grep -c "ok installed") -eq 0 ];then
+if [ $(dpkg-query -W -f='${Status}' 'php-mysql' | grep -c "ok installed") -eq 0 ];then
 # No podem trobar el paquet 'php-mysql' amb $(dpkg-query -W -f='${Status}' 'mariadb-server'
 # Si no trobem PHP-MYSQL, avisem que no està instal·lat
 #       echo "PHP-MySQL no està instal·lat." >>/script/registre.txt
@@ -33,7 +33,9 @@ fi
                 echo -e "${ROJO}PHP-MySQL no s'ha instal·lat.${NORMAL}"
                 exit
         fi
-
+else
+        echo -e "${VERDE}PHP-MySQL ja està instal·lat.${NORMAL}"
+fi
 apt -y install lsb-release apt-transport-https ca-certificates >/dev/null 2>&1
         if [ $? -eq 0 ];then
                 echo "Instl.lant actualització de php" >>/script/registre.txt
@@ -65,7 +67,8 @@ echo “deb https://packages.sury.org/php/ $( lsb_release -sc) main” | tee /et
         fi
         
 apt-get update >/dev/null 2>&1
-apt-get install php7.4 >/dev/null 2>&1
+if [ $(dpkg-query -W -f='${Status}' 'php7.4' | grep -c "ok installed") -eq 0 ];then
+apt-get -y install php7.4 >/dev/null 2>&1
         if [ $? -eq 0 ];then
                 echo "Instal.lant la versio 7.4 de php" >>/script/registre.txt
                 echo -e "${VERDE}Instal.lant la versio 7.4 de php.${NORMAL}"
@@ -74,6 +77,9 @@ apt-get install php7.4 >/dev/null 2>&1
                 echo -e "${ROJO}ERROR d'actualització 3.${NORMAL}"
                 exit
         fi
+else
+        echo -e "${VERDE}PHP7.4 ja està instal·lat.${NORMAL}"
+fi
 a2dismod php7.3
         if [ $? -eq 0 ];then
                 echo "Deshabilitant la versio 7.3 de php" >>/script/registre.txt
@@ -93,3 +99,18 @@ a2enmod php7.4
                 exit
         fi
         
+if [ $(dpkg-query -W -f='${Status}' 'php7.4-mysql' | grep -c "ok installed") -eq 0 ];then
+        apt-get -y install php-mysql >/dev/null 2>&1
+        if [ $? -eq 0 ];then
+                echo "PHP-MySQL instal·lat correctament." >>/script/registre.txt
+                echo -e "${VERDE}PHP-MySQL instal·lat correctament.${NORMAL}"
+        else
+                echo -e "${ROJO}PHP-MySQL no s'ha instal·lat.${NORMAL}" >>/script/registre.txt
+                echo -e "${ROJO}PHP-MySQL no s'ha instal·lat.${NORMAL}"
+                exit
+        fi
+else
+        echo -e "${VERDE}PHP7.4-MySQL ja està instal·lat.${NORMAL}"
+fi
+
+#------ Instal.lacio paquets
