@@ -124,8 +124,15 @@ else
 fi
 
 # PART 3 - DEPENDÈNCIES DE PHP ################################################################################
-
-
+apt -y install lsb-release apt-transport-https ca-certificates >/dev/null 2>&1
+if [ $? -eq 0 ];then
+        echo "Repositoris de PHP lsb-release, apt-transport-https i ca-certificates instal·lats correctament." >>/script/registre.txt
+        echo -e "${VERDE}Repositoris de PHP lsb-release, apt-transport-https i ca-certificates instal·lats correctament.${NORMAL}"
+else
+        echo -e "${ROJO}Repositoris de PHP lsb-release, apt-transport-https i ca-certificates no instal·lats correctament.${NORMAL}" >>/script/registre.txt
+        echo -e "${ROJO}Repositoris de PHP lsb-release, apt-transport-https i ca-certificates no instal·lats correctament.${NORMAL}"
+        exit
+fi
 
 # PART 4 - DESCÀRREGA DE ROUNDCUBE ################################################################################
 #Instalació de Roundcube
