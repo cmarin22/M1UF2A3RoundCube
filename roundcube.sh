@@ -56,12 +56,12 @@ fi
                 exit
         fi
 #else
-#        echo "MariaDB-Server ja està instal.lat"
+#       echo "MariaDB-Server ja està instal.lat"
 #fi
 
 #Instal.lació paquet PHP
 if [ $(dpkg-query -W -f='${Status}' 'php' | grep -c "ok installed") -eq 0 ];then
-# Si no trobem Apache2, avisem que no està instal·lat
+# Si no trobem PHP, avisem que no està instal·lat
         echo "PHP no està instal·lat." >>/script/registre.txt
         echo "PHP no està instal·lat."
         apt-get -y install php >/dev/null 2>&1
@@ -69,6 +69,7 @@ if [ $(dpkg-query -W -f='${Status}' 'php' | grep -c "ok installed") -eq 0 ];then
                 echo "PHP instal·lat correctament." >>/script/registre.txt
                 echo -e "${VERDE}PHP instal·lat correctament.${NORMAL}"
         else
+                echo -e "${ROJO}PHP no s'ha instal·lat.${NORMAL}" >>/script/registre.txt
                 echo -e "${ROJO}PHP no s'ha instal·lat.${NORMAL}"
                 exit
         fi
@@ -77,21 +78,24 @@ else
 fi
 
 #Instal.lació paquet PHP-MySQL
-if [ $(dpkg-query -W -f='${Status}' 'php-mysql' | grep -c "ok installed") -eq 0 ];then
-# Si no trobem Apache2, avisem que no està instal·lat
-        echo "PHP-MySQL no està instal·lat." >>/script/registre.txt
-        echo "PHP-MySQL no està instal·lat."
+# if [ $(dpkg-query -W -f='${Status}' 'php-mysql' | grep -c "ok installed") -eq 0 ];then
+# No podem trobar el paquet 'php-mysql' amb $(dpkg-query -W -f='${Status}' 'mariadb-server'
+# Si no trobem PHP-MYSQL, avisem que no està instal·lat
+#       echo "PHP-MySQL no està instal·lat." >>/script/registre.txt
+# Com que no podem comprovar si està instal·lat o no PHP-MySQL, l'instal·larem i si no hi ha errors, 
+# voldrar dir que s'ha instal·lat encara que podria ja estar instal·lat abans.
         apt-get -y install php-mysql >/dev/null 2>&1
         if [ $? -eq 0 ];then
                 echo "PHP-MySQL instal·lat correctament." >>/script/registre.txt
                 echo -e "${VERDE}PHP-MySQL instal·lat correctament.${NORMAL}"
         else
+                echo -e "${ROJO}PHP-MySQL no s'ha instal·lat.${NORMAL}" >>/script/registre.txt
                 echo -e "${ROJO}PHP-MySQL no s'ha instal·lat.${NORMAL}"
                 exit
         fi
-else
-        echo -e "${VERDE}PHP-MySQL ja està instal·lat.${NORMAL}"
-fi
+#else
+#       echo -e "${VERDE}PHP-MySQL ja està instal·lat.${NORMAL}"
+#fi
 
 
 
