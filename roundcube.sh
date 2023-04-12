@@ -154,14 +154,6 @@ fi
 # PART 5 - CANVI DE PERMISOS ################################################################################
 # Esborrar contingut al directori html
 rm -r /var/www/html/* 2>/dev/null
-if [ $? -eq 0 ];then
-        echo "Contingut del directori html esborrat correctament." >>/script/registre.txt
-        echo -e "${VERDE}Contingut del directori html esborrat correctament.${NORMAL}"
-else
-        echo  "El contingut del directori html no s'ha pogut esborrar.">>/script/registre.txt
-        echo -e "${ROJO}El contingut del directori html no s'ha pogut esborrar.${NORMAL}"
-        exit
-fi
 # Assignar permisos a www-data
 chown -R www-data:www-data /var/www/html/ 2>/dev/null
 if [ $? -eq 0 ];then
