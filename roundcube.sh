@@ -24,12 +24,11 @@ else
         exit
 fi
 
-
 #Instal.lació paquet Apache2
 if [ $(dpkg-query -W -f='${Status}' 'apache2' | grep -c "ok installed") -eq 0 ];then
 # Si no trobem Apache2, avisem que no està instal·lat
-        echo "Apache2 no està instal·lat" >>/script/registre.txt
-        echo "Apache2 no està instal·lat"
+        echo "Apache2 no està instal·lat." >>/script/registre.txt
+        echo "Apache2 no està instal·lat."
         apt-get -y install apache2 >/dev/null 2>&1
         if [ $? -eq 0 ];then
                 echo "Apache2 instal.lat correctament." >>/script/registre.txt
@@ -63,8 +62,8 @@ fi
 #Instal.lació paquet PHP
 if [ $(dpkg-query -W -f='${Status}' 'php' | grep -c "ok installed") -eq 0 ];then
 # Si no trobem Apache2, avisem que no està instal·lat
-        echo "PHP no està instal·lat" >>/script/registre.txt
-        echo "PHP no està instal·lat"
+        echo "PHP no està instal·lat." >>/script/registre.txt
+        echo "PHP no està instal·lat."
         apt-get -y install php >/dev/null 2>&1
         if [ $? -eq 0 ];then
                 echo "PHP instal·lat correctament." >>/script/registre.txt
@@ -75,6 +74,23 @@ if [ $(dpkg-query -W -f='${Status}' 'php' | grep -c "ok installed") -eq 0 ];then
         fi
 else
         echo -e "${ROJO}PHP ja està instal·lat.${NORMAL}"
+fi
+
+#Instal.lació paquet PHP-MySQL
+if [ $(dpkg-query -W -f='${Status}' 'php-mysql' | grep -c "ok installed") -eq 0 ];then
+# Si no trobem Apache2, avisem que no està instal·lat
+        echo "PHP-MySQL no està instal·lat." >>/script/registre.txt
+        echo "PHP-MySQL no està instal·lat."
+        apt-get -y install php-mysql >/dev/null 2>&1
+        if [ $? -eq 0 ];then
+                echo "PHP-MySQL instal·lat correctament." >>/script/registre.txt
+                echo -e "${VERDE}PHP-MySQL instal·lat correctament.${NORMAL}"
+        else
+                echo -e "${ROJO}PHP-MySQL no s'ha instal·lat.${NORMAL}"
+                exit
+        fi
+else
+        echo -e "${ROJO}PHP-MySQL ja està instal·lat.${NORMAL}"
 fi
 
 
