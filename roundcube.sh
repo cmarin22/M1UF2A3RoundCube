@@ -131,7 +131,7 @@ fi
 #Instalació de Roundcube
 mkdir /opt 2>&1
 cd /opt/ 2>&1
-rm -r * 2>&1
+rm -r roundcubemail* 2>&1
 wget https://github.com/roundcube/roundcubemail/releases/download/1.6.1/roundcubemail-1.6.1-complete.tar.gz >/dev/null 2>&1
 tar -xvzf roundcubemail-1.6.1-complete.tar.gz>/dev/null 2>&1            
 if [ $? -eq 0 ];then
@@ -140,4 +140,5 @@ if [ $? -eq 0 ];then
 else
         echo  "L'arxiu de Roundcube no s'ha pogut descarregar.">>/script/registre.txt
         echo -e "${ROJO}L'arxiu de Roundcube no s'ha pogut descarregar.${NORMAL}"
+        exit
 fi
