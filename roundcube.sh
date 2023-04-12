@@ -154,16 +154,6 @@ fi
 # PART 5 - CANVI DE PERMISOS ################################################################################
 # Esborrar contingut al directori html
 rm -r /var/www/html/* 2>/dev/null
-# Assignar permisos a www-data
-chown -R www-data:www-data /var/www/html/ 2>/dev/null
-if [ $? -eq 0 ];then
-        echo "Permisos assignats a www-data correctament." >>/script/registre.txt
-        echo -e "${VERDE}Permisos assignats a www-data correctament.${NORMAL}"
-else
-        echo  "Els permisos no s'han assignat a www-data correctament.">>/script/registre.txt
-        echo -e "${ROJO}Els permisos no s'han assignat a www-data correctament.${NORMAL}"
-        exit
-fi
 # Moure el contingut de RoundCube al directori html
 mv roundcubemail-1.6.1/* /var/www/html/ 2>/dev/null
 if [ $? -eq 0 ];then
@@ -174,6 +164,17 @@ else
         echo -e "${ROJO}El contigut de RoundCube no s'ha mogut al directori html correctament.${NORMAL}"
         exit
 fi
+# Assignar permisos a www-data
+chown -R www-data:www-data /var/www/html/ 2>/dev/null
+if [ $? -eq 0 ];then
+        echo "Permisos assignats a www-data correctament." >>/script/registre.txt
+        echo -e "${VERDE}Permisos assignats a www-data correctament.${NORMAL}"
+else
+        echo  "Els permisos no s'han assignat a www-data correctament.">>/script/registre.txt
+        echo -e "${ROJO}Els permisos no s'han assignat a www-data correctament.${NORMAL}"
+        exit
+fi
+
 # Assignar permisos a tot el directori html
 chmod -R 755 /var/www/html/ 2>/dev/null
 if [ $? -eq 0 ];then
