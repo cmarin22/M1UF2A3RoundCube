@@ -254,7 +254,7 @@ if [ $(dpkg-query -W -f='${Status}' 'php7.4-imagick' | grep -c "ok installed") -
 else
         echo -e "${VERDE}php7.4-imagick ja està instal·lat.${NORMAL}"
 fi
-php7.4-imagick
+
 
 #systemctl restart apache2
 
