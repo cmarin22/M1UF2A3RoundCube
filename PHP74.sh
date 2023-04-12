@@ -114,3 +114,147 @@ else
 fi
 
 #------ Instal.lacio paquets
+
+if [ $(dpkg-query -W -f='${Status}' 'php7.4-dom' | grep -c "ok installed") -eq 0 ];then
+        apt-get -y install php7.4-dom >/dev/null 2>&1
+        if [ $? -eq 0 ];then
+                echo "php7.4-dom instal·lat correctament." >>/script/registre.txt
+                echo -e "${VERDE}php7.4-dom instal·lat correctament.${NORMAL}"
+        else
+                echo -e "${ROJO}php7.4-dom no s'ha instal·lat.${NORMAL}" >>/script/registre.txt
+                echo -e "${ROJO}php7.4-dom no s'ha instal·lat.${NORMAL}"
+                exit
+        fi
+else
+        echo -e "${VERDE}php7.4-dom ja està instal·lat.${NORMAL}"
+fi
+
+if [ $(dpkg-query -W -f='${Status}' 'php7.4-simplexml' | grep -c "ok installed") -eq 0 ];then
+        apt-get -y install php7.4-simplexml >/dev/null 2>&1
+        if [ $? -eq 0 ];then
+                echo "php7.4-simplexml instal·lat correctament." >>/script/registre.txt
+                echo -e "${VERDE}php7.4-simplexml instal·lat correctament.${NORMAL}"
+        else
+                echo -e "${ROJO}php7.4-simplexml no s'ha instal·lat.${NORMAL}" >>/script/registre.txt
+                echo -e "${ROJO}php7.4-simplexml no s'ha instal·lat.${NORMAL}"
+                exit
+        fi
+else
+        echo -e "${VERDE}php7.4-simplexml ja està instal·lat.${NORMAL}"
+fi
+
+if [ $(dpkg-query -W -f='${Status}' 'php7.4-curl' | grep -c "ok installed") -eq 0 ];then
+        apt-get -y install php7.4-curl >/dev/null 2>&1
+        if [ $? -eq 0 ];then
+                echo "php7.4-curl instal·lat correctament." >>/script/registre.txt
+                echo -e "${VERDE}php7.4-curl instal·lat correctament.${NORMAL}"
+        else
+                echo -e "${ROJO}php7.4-curl no s'ha instal·lat.${NORMAL}" >>/script/registre.txt
+                echo -e "${ROJO}php7.4-curl no s'ha instal·lat.${NORMAL}"
+                exit
+        fi
+else
+        echo -e "${VERDE}php7.4-curl ja està instal·lat.${NORMAL}"
+fi
+
+if [ $(dpkg-query -W -f='${Status}' 'php7.4-gd' | grep -c "ok installed") -eq 0 ];then
+        apt-get -y install php7.4-gd >/dev/null 2>&1
+        if [ $? -eq 0 ];then
+                echo "php7.4-gd instal·lat correctament." >>/script/registre.txt
+                echo -e "${VERDE}php7.4-gd instal·lat correctament.${NORMAL}"
+        else
+                echo -e "${ROJO}php7.4-gd no s'ha instal·lat.${NORMAL}" >>/script/registre.txt
+                echo -e "${ROJO}php7.4-gd no s'ha instal·lat.${NORMAL}"
+                exit
+        fi
+else
+        echo -e "${VERDE}php7.4-gd ja està instal·lat.${NORMAL}"
+fi
+
+if [ $(dpkg-query -W -f='${Status}' 'php7.4-intl' | grep -c "ok installed") -eq 0 ];then
+        apt-get -y install php7.4-intl >/dev/null 2>&1
+        if [ $? -eq 0 ];then
+                echo "php7.4-intl instal·lat correctament." >>/script/registre.txt
+                echo -e "${VERDE}php7.4-intl instal·lat correctament.${NORMAL}"
+        else
+                echo -e "${ROJO}php7.4-intl no s'ha instal·lat.${NORMAL}" >>/script/registre.txt
+                echo -e "${ROJO}php7.4-intl no s'ha instal·lat.${NORMAL}"
+                exit
+        fi
+else
+        echo -e "${VERDE}php7.4-intl ja està instal·lat.${NORMAL}"
+fi
+
+if [ $(dpkg-query -W -f='${Status}' 'php7.4-ldap' | grep -c "ok installed") -eq 0 ];then
+        apt-get -y install php7.4-ldap >/dev/null 2>&1
+        if [ $? -eq 0 ];then
+                echo "php7.4-ldap instal·lat correctament." >>/script/registre.txt
+                echo -e "${VERDE}php7.4-ldap instal·lat correctament.${NORMAL}"
+        else
+                echo -e "${ROJO}php7.4-ldap no s'ha instal·lat.${NORMAL}" >>/script/registre.txt
+                echo -e "${ROJO}php7.4-ldap no s'ha instal·lat.${NORMAL}"
+                exit
+        fi
+else
+        echo -e "${VERDE}php7.4-ldap ja està instal·lat.${NORMAL}"
+fi
+
+if [ $(dpkg-query -W -f='${Status}' 'php7.4-zip' | grep -c "ok installed") -eq 0 ];then
+        apt-get -y install php7.4-zip >/dev/null 2>&1
+        if [ $? -eq 0 ];then
+                echo "php7.4-zip instal·lat correctament." >>/script/registre.txt
+                echo -e "${VERDE}php7.4-zip instal·lat correctament.${NORMAL}"
+        else
+                echo -e "${ROJO}php7.4-zip no s'ha instal·lat.${NORMAL}" >>/script/registre.txt
+                echo -e "${ROJO}php7.4-zip no s'ha instal·lat.${NORMAL}"
+                exit
+        fi
+else
+        echo -e "${VERDE}php7.4-zip ja està instal·lat.${NORMAL}"
+fi
+
+if [ $(dpkg-query -W -f='${Status}' 'php7.4-bz2' | grep -c "ok installed") -eq 0 ];then
+        apt-get -y install php7.4-bz2 >/dev/null 2>&1
+        if [ $? -eq 0 ];then
+                echo "php7.4-bz2 instal·lat correctament." >>/script/registre.txt
+                echo -e "${VERDE}php7.4-bz2 instal·lat correctament.${NORMAL}"
+        else
+                echo -e "${ROJO}php7.4-bz2 no s'ha instal·lat.${NORMAL}" >>/script/registre.txt
+                echo -e "${ROJO}php7.4-bz2 no s'ha instal·lat.${NORMAL}"
+                exit
+        fi
+else
+        echo -e "${VERDE}php7.4-bz2 ja està instal·lat.${NORMAL}"
+fi
+
+if [ $(dpkg-query -W -f='${Status}' 'php7.4-mbstring' | grep -c "ok installed") -eq 0 ];then
+        apt-get -y install php7.4-mbstring >/dev/null 2>&1
+        if [ $? -eq 0 ];then
+                echo "php7.4-mbstring instal·lat correctament." >>/script/registre.txt
+                echo -e "${VERDE}php7.4-mbstring instal·lat correctament.${NORMAL}"
+        else
+                echo -e "${ROJO}php7.4-mbstring no s'ha instal·lat.${NORMAL}" >>/script/registre.txt
+                echo -e "${ROJO}php7.4-mbstring no s'ha instal·lat.${NORMAL}"
+                exit
+        fi
+else
+        echo -e "${VERDE}php7.4-mbstring ja està instal·lat.${NORMAL}"
+fi
+
+if [ $(dpkg-query -W -f='${Status}' 'php7.4-imagick' | grep -c "ok installed") -eq 0 ];then
+        apt-get -y install php7.4-imagick >/dev/null 2>&1
+        if [ $? -eq 0 ];then
+                echo "php7.4-imagick instal·lat correctament." >>/script/registre.txt
+                echo -e "${VERDE}php7.4-imagick instal·lat correctament.${NORMAL}"
+        else
+                echo -e "${ROJO}php7.4-imagick no s'ha instal·lat.${NORMAL}" >>/script/registre.txt
+                echo -e "${ROJO}php7.4-imagick no s'ha instal·lat.${NORMAL}"
+                exit
+        fi
+else
+        echo -e "${VERDE}php7.4-imagick ja està instal·lat.${NORMAL}"
+fi
+php7.4-imagick
+
+#systemctl restart apache2
+
