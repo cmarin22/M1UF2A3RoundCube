@@ -401,7 +401,7 @@ fi
 
 # Les funciones a2dismod y a2enmod no funcionen quan actualitzem els repositoris per instal·lar PHP7.4 (Si la màquina té interfície gràfica)
 # Deshabilitar PHP 7.3
-a2dismod php7.3
+a2dismod php7.3 2>/dev/null
 if [ $? -eq 0 ];then
         echo "PHP 7.3 deshabilitat correctament." >>/script/registre.txt
         echo -e "${VERDE}PHP 7.3 deshabilitat correctament.${NORMAL}"
@@ -412,7 +412,7 @@ else
 fi
 
 # Habilitar PHP 7.4
-a2enmod php7.4
+a2enmod php7.4 2>/dev/null
 if [ $? -eq 0 ];then
         echo "PHP 7.4 habilitat correctament." >>/script/registre.txt
         echo -e "${VERDE}PHP 7.4 habilitat correctament.${NORMAL}"
