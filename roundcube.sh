@@ -399,7 +399,7 @@ else
 fi
 
 # Comprovar PHP 7.4
-if [ $(dpkg-query -W -f='${Status}' 'php --version' 2>/dev/null | grep -c "PHP 7.4") -eq 0 ]; then
+if [ (php --version | grep -c "PHP 7.4") -eq 0 ]; then
         echo "PHP 7.4 no està instal·lat." >>/script/registre.txt
         echo "PHP 7.4 no està funcionant."
 else
