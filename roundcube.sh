@@ -399,24 +399,29 @@ else
 fi
 
 # Comprovar PHP 7.4
-if [ (php --version | grep -c "PHP 7.4") -eq 0 ]; then
-        echo "PHP 7.4 no està instal·lat." >>/script/registre.txt
-        echo "PHP 7.4 no està funcionant."
+valor=$(php --version | grep -c "PHP 7.4")
+if [ $valor -eq 0 ]; then
+        echo "${ROJO}La versió de PHP que s'està utilitzant no és la 7.4.${NORMAL}" >>/script/registre.txt
+        echo "${ROJO}La versió de PHP que s'està utilitzant no és la 7.4.${NORMAL}"
+        exit
 else
-        echo "PHP 7.4 està funcionant." >>/script/registre.txt
-        echo "PHP 7.4 està funcionant."
+        echo "${VERDE}La versió de PHP que s'està utilitzant és la 7.4.${NORMAL}" >>/script/registre.txt
+        echo "${VERDE}La versió de PHP que s'està utilitzant és la 7.4.${NORMAL}"
 fi
+
 
 # Reinicar Apache2
 systemctl restart apache2
 if [ $? -eq 0 ];then
-        echo "Apache reiniciat." >>/script/registre.txt
-        echo -e "${VERDE}Apache reiniciat.${NORMAL}"
+        echo "Apache reiniciat correctament." >>/script/registre.txt
+        echo -e "${VERDE}Apache reiniciat correctament.${NORMAL}"
 else
-        echo  "Apache no reiniciat.">>/script/registre.txt
-        echo -e "${ROJO}Apache no reiniciat.${NORMAL}"
+        echo  "Apache no reiniciat correctament.">>/script/registre.txt
+        echo -e "${ROJO}Apache no reiniciat correctament.${NORMAL}"
         exit
 fi
+
+# Les funciones a2dismod y a2enmod no funcionen quan actualitzem els repositoris per instal·lar PHP7.4
 
 # Deshabilitar PHP 7.3
 #a2dismod php7.3
