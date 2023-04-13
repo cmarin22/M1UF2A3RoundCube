@@ -56,7 +56,7 @@ wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg >/d
                 exit
         fi
 
-echo “deb https://packages.sury.org/php/ $( lsb_release -sc) main” | tee /etc/apt/sources.list.d/php.list >/dev/null 2>&1
+echo “deb https://packages.sury.org/php/ $(lsb_release -sc) main” | tee /etc/apt/sources.list.d/php.list >/dev/null 2>&1
         if [ $? -eq 0 ];then
                 echo "Comprovant actualització de php" >>/script/registre.txt
                 echo -e "${VERDE}Comprovant actualització de php.${NORMAL}"
