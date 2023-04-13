@@ -9,7 +9,7 @@ VERDE='\e[32m'          # Color Verd
 ROJOBK='\e[41m'         # Fons Vermell
 On_Purple='\033[45m'    # Fons Lila
 
-# PART 0 - COMPROVAR QUE SOM L'USUARI ROOT ################################################################################
+# PART 0 - COMPROVAR QUE SOM L'USUARI ROOT + ACTUALITZAR REPOSITORIS ################################################################################
 echo -e "${On_Purple}SCRIPT AUTOMÀTIC PER INSTAL·LAR EL SERVIDOR ROUNDCUBE${NORMAL}"
 #Comprovació de l’usuari
 #Aquest condicional utilitza la comanda “whoami”, serveix per identificar l’usuari actual
@@ -26,6 +26,17 @@ else
         exit
 fi
 
+# Actualització dels repositoris
+apt-get update >/dev/null 2>&1
+if [ $? -eq 0 ]; then
+        echo "Repositoris de Linux actualitzats correctament." >>/script/registre.txt
+        echo -e "${VERDE}Repositoris de Linux actualitzats correctament.${NORMAL}"
+else
+        echo -e "${ROJO}No s'han pogut actualitzat els repositoris de Linux, potser no tens internet.${NORMAL}" >>/script/registre.txt
+        echo -e "${ROJO}No s'han pogut actualitzat els repositoris de Linux, potser no tens internet.${NORMAL}"
+        exit
+fi
+
 # PART 1 - PAQUET LAMP ################################################################################
 #Instal.lació paquet Apache2
 if [ $(dpkg-query -W -f='${Status}' 'apache2' 2>/dev/null | grep -c "ok installed") -eq 0 ];then
@@ -33,7 +44,7 @@ if [ $(dpkg-query -W -f='${Status}' 'apache2' 2>/dev/null | grep -c "ok installe
         echo "Apache2 no està instal·lat." >>/script/registre.txt
         echo "Apache2 no està instal·lat."
         apt-get -y install apache2 >/dev/null 2>&1
-        if [ $? -eq 0 ];then
+        if [ $? -eq 0 ]; then
                 echo "Apache2 instal.lat correctament." >>/script/registre.txt
                 echo -e "${VERDE}Apache2 instal·lat correctament.${NORMAL}"
         else
@@ -49,7 +60,7 @@ if [ $(dpkg-query -W -f='${Status}' 'mariadb-server' 2>/dev/null | grep -c "ok i
         echo "MariaDB-Server no està instal·lat" >>/script/registre.txt
         echo "MariaDB-Server no està instal·lat"
         apt-get -y install mariadb-server >/dev/null 2>&1
-        if [ $? -eq 0 ];then
+        if [ $? -eq 0 ]; then
                 echo "MariaDB-Server instal·lat correctament." >>/script/registre.txt
                 echo -e "${VERDE}MariaDB-Server instal·lat correctament.${NORMAL}"
         else
@@ -68,7 +79,7 @@ if [ $(dpkg-query -W -f='${Status}' 'php' 2>/dev/null | grep -c "ok installed") 
         echo "PHP no està instal·lat." >>/script/registre.txt
         echo "PHP no està instal·lat."
         apt-get -y install php >/dev/null 2>&1
-        if [ $? -eq 0 ];then
+        if [ $? -eq 0 ]; then
                 echo "PHP instal·lat correctament." >>/script/registre.txt
                 echo -e "${VERDE}PHP instal·lat correctament.${NORMAL}"
         else
@@ -90,7 +101,7 @@ if [ $(dpkg-query -W -f='${Status}' 'php-mysql' 2>/dev/null | grep -c "ok instal
 # Com que no podem comprovar si està instal·lat o no PHP-MySQL, l'instal·larem i si no hi ha errors, 
 # voldrar dir que s'ha instal·lat encara que podria ja estar instal·lat abans.
         apt-get -y install php-mysql >/dev/null 2>&1
-        if [ $? -eq 0 ];then
+        if [ $? -eq 0 ]; then
                 echo "PHP-MySQL instal·lat correctament." >>/script/registre.txt
                 echo -e "${VERDE}PHP-MySQL instal·lat correctament.${NORMAL}"
         else
@@ -127,7 +138,7 @@ fi
 # PART 3 - DEPENDÈNCIES DE PHP ################################################################################
 # Repositoris de PHP lsb-release, apt-transport-https i ca-certificate
 apt -y install lsb-release apt-transport-https ca-certificates >/dev/null 2>&1
-if [ $? -eq 0 ];then
+if [ $? -eq 0 ]; then
         echo "Repositoris de PHP lsb-release, apt-transport-https i ca-certificates instal·lats correctament." >>/script/registre.txt
         echo -e "${VERDE}Repositoris de PHP lsb-release, apt-transport-https i ca-certificates instal·lats correctament.${NORMAL}"
 else
@@ -135,9 +146,10 @@ else
         echo -e "${ROJO}Repositoris de PHP lsb-release, apt-transport-https i ca-certificates no instal·lats correctament.${NORMAL}"
         exit
 fi
+
 # Paquet apt.gpg de PHP
 wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg >/dev/null 2>&1
-if [ $? -eq 0 ];then
+if [ $? -eq 0 ]; then
         echo "Paquet apt.gpg de PHP instal·lat correctament." >>/script/registre.txt
         echo -e "${VERDE}Paquet apt.gpg de PHP instal·lat correctament.${NORMAL}"
 else
@@ -146,11 +158,81 @@ else
         exit
 fi
 
+# Llistats de paquets de PHP
+echo “deb https://packages.sury.org/php/ $( lsb_release -sc) main” | tee /etc/apt/sources.list.d/php.list >/dev/null 2>&1
+if [ $? -eq 0 ]; then
+        echo "Llistat de paquets de PHP actualitzats." >>/script/registre.txt
+        echo -e "${VERDE}Llistat de paquets de PHP actualitzats.${NORMAL}"
+else
+        echo -e "${ROJO}Llistat de paquets de PHP no actualitzats.${NORMAL}" >>/script/registre.txt
+        echo -e "${ROJO}Llistat de paquets de PHP no actualitzats.${NORMAL}"
+        exit
+fi
+
+# Instal·lar php7.4
+if [ $(dpkg-query -W -f='${Status}' 'php7.4' 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
+        echo "PHP 7.4 no està instal·lat." >>/script/registre.txt
+        echo "PHP 7.4 no està instal·lat."
+        apt-get -y install php7.4 >/dev/null 2>&1
+        if [ $? -eq 0 ]; then
+                echo "Instal·lació correcta de PHP 7.4." >>/script/registre.txt
+                echo -e "${VERDE}Instal·lació correcta de PHP 7.4.${NORMAL}"
+        else
+                echo -e "${ROJO}Instal·lació errònea de PHP 7.4.${NORMAL}" >>/script/registre.txt
+                echo -e "${ROJO}Instal·lació errònea de PHP 7.4.${NORMAL}"
+                exit
+        fi
+else
+        echo -e "${VERDE}PHP7.4 ja està instal·lat.${NORMAL}" >>/script/registre.txt
+        echo -e "${VERDE}PHP7.4 ja està instal·lat.${NORMAL}"
+fi
+
+# Deshabilitar PHP 7.3
+a2dismod php7.3
+if [ $? -eq 0 ];then
+        echo "PHP 7.3 deshabilitat correctament." >>/script/registre.txt
+        echo -e "${VERDE}PHP 7.3 deshabilitat correctament.${NORMAL}"
+else
+        echo -e "${ROJO}PHP 7.3 no s'ha pogut deshabilitar correctament.${NORMAL}" >>/script/registre.txt
+        echo -e "${ROJO}PHP 7.3 no s'ha pogut deshabilitar correctament.${NORMAL}"
+        exit
+fi
+
+# Habilitar PHP 7.4
+a2enmod php7.4
+if [ $? -eq 0 ];then
+        echo "PHP 7.4 habilitat correctament." >>/script/registre.txt
+        echo -e "${VERDE}PHP 7.4 habilitat correctament.${NORMAL}"
+else
+        echo -e "${ROJO}PHP 7.4 no s'ha pogut habilitar correctament.${NORMAL}" >>/script/registre.txt
+        echo -e "${ROJO}PHP 7.4 no s'ha pogut habilitar correctament.${NORMAL}"
+        exit
+fi
+
+# Instal·lar el paquet PHP7.4-MySQL
+if [ $(dpkg-query -W -f='${Status}' 'php7.4-mysql' 2>/dev/null | grep -c "ok installed") -eq 0 ];then
+        apt-get -y install php-mysql >/dev/null 2>&1
+        if [ $? -eq 0 ];then
+                echo "${VERDE}PHP7.4-MySQL instal·lat correctament.${NORMAL}" >>/script/registre.txt
+                echo -e "${VERDE}PHP-MySQL instal·lat correctament.${NORMAL}"
+        else
+                echo -e "${ROJO}PHP7.4-MySQL no s'ha instal·lat correctament.${NORMAL}" >>/script/registre.txt
+                echo -e "${ROJO}PHP7.4-MySQL no s'ha instal·lat correctament.${NORMAL}"
+                exit
+        fi
+else
+        echo -e "${VERDE}PHP7.4-MySQL ja està instal·lat.${NORMAL}" >>/script/registre.txt
+        echo -e "${VERDE}PHP7.4-MySQL ja està instal·lat.${NORMAL}"
+fi
+
+
 # PART 4 - DESCÀRREGA DE ROUNDCUBE ################################################################################
-#Instalació de Roundcube
+# Creació del directori on descarregarem Roundcube
 mkdir /opt 2>/dev/null
 cd /opt/ 2>/dev/null
 rm -r roundcubemail* 2>/dev/null
+
+# Descarregar l'arxiu de Roundcube
 wget https://github.com/roundcube/roundcubemail/releases/download/1.6.1/roundcubemail-1.6.1-complete.tar.gz >/dev/null 2>&1           
 if [ $? -eq 0 ];then
         echo "Arxiu d'instal·lació de Roundcube descarregat correctament." >>/script/registre.txt
@@ -160,6 +242,8 @@ else
         echo -e "${ROJO}L'arxiu de Roundcube no s'ha pogut descarregar.${NORMAL}"
         exit
 fi
+
+# Decomprimir l'arxiu de Roundcube
 tar -xvzf roundcubemail-1.6.1-complete.tar.gz>/dev/null 2>&1
 if [ $? -eq 0 ];then
         echo "Arxiu d'instal·lació de Roundcube descomprimit correctament." >>/script/registre.txt
@@ -173,6 +257,7 @@ fi
 # PART 5 - CANVI DE PERMISOS ################################################################################
 # Esborrar contingut al directori html
 rm -r /var/www/html/* 2>/dev/null
+
 # Moure el contingut de RoundCube al directori html
 mv roundcubemail-1.6.1/* /var/www/html/ 2>/dev/null
 if [ $? -eq 0 ];then
@@ -183,6 +268,7 @@ else
         echo -e "${ROJO}El contigut de RoundCube no s'ha mogut al directori html correctament.${NORMAL}"
         exit
 fi
+
 # Assignar permisos a www-data
 chown -R www-data:www-data /var/www/html/ 2>/dev/null
 if [ $? -eq 0 ];then
