@@ -140,6 +140,28 @@ else
 fi
 
 # PART 3 - DEPENDÈNCIES DE PHP ################################################################################
+# Actualització dels repositoris
+apt-get update >/dev/null 2>&1
+if [ $? -eq 0 ]; then
+        echo "Repositoris de Linux actualitzats correctament." >>/script/registre.txt
+        echo -e "${VERDE}Repositoris de Linux actualitzats correctament.${NORMAL}"
+else
+        echo -e "${ROJO}No s'han pogut actualitzat els repositoris de Linux, potser no tens internet.${NORMAL}" >>/script/registre.txt
+        echo -e "${ROJO}No s'han pogut actualitzat els repositoris de Linux, potser no tens internet.${NORMAL}"
+        exit
+fi
+
+# Actualització dels repositoris (tots)
+apt-get upgrade >/dev/null 2>&1
+if [ $? -eq 0 ]; then
+        echo "Repositoris de Linux actualitzats correctament (tots)." >>/script/registre.txt
+        echo -e "${VERDE}Repositoris de Linux actualitzats correctament (tots).${NORMAL}"
+else
+        echo -e "${ROJO}No s'han pogut actualitzat (tots) els repositoris de Linux, potser no tens internet.${NORMAL}" >>/script/registre.txt
+        echo -e "${ROJO}No s'han pogut actualitzat (tots) els repositoris de Linux, potser no tens internet.${NORMAL}"
+        exit
+fi
+
 # Repositoris de PHP lsb-release, apt-transport-https i ca-certificate
 apt -y install lsb-release apt-transport-https ca-certificates >/dev/null 2>&1
 if [ $? -eq 0 ]; then
@@ -175,28 +197,6 @@ if [ $? -eq 0 ]; then
 else
         echo -e "${ROJO}Llistat de paquets de PHP no actualitzats.${NORMAL}" >>/script/registre.txt
         echo -e "${ROJO}Llistat de paquets de PHP no actualitzats.${NORMAL}"
-        exit
-fi
-
-# Actualització dels repositoris
-apt-get update >/dev/null 2>&1
-if [ $? -eq 0 ]; then
-        echo "Repositoris de Linux actualitzats correctament." >>/script/registre.txt
-        echo -e "${VERDE}Repositoris de Linux actualitzats correctament.${NORMAL}"
-else
-        echo -e "${ROJO}No s'han pogut actualitzat els repositoris de Linux, potser no tens internet.${NORMAL}" >>/script/registre.txt
-        echo -e "${ROJO}No s'han pogut actualitzat els repositoris de Linux, potser no tens internet.${NORMAL}"
-        exit
-fi
-
-# Actualització dels repositoris (tots)
-apt-get upgrade >/dev/null 2>&1
-if [ $? -eq 0 ]; then
-        echo "Repositoris de Linux actualitzats correctament (tots)." >>/script/registre.txt
-        echo -e "${VERDE}Repositoris de Linux actualitzats correctament (tots).${NORMAL}"
-else
-        echo -e "${ROJO}No s'han pogut actualitzat (tots) els repositoris de Linux, potser no tens internet.${NORMAL}" >>/script/registre.txt
-        echo -e "${ROJO}No s'han pogut actualitzat (tots) els repositoris de Linux, potser no tens internet.${NORMAL}"
         exit
 fi
 
@@ -238,6 +238,8 @@ fi
 
 # Instal·lació del paquet php7.4-dom
 if [ $(dpkg-query -W -f='${Status}' 'php7.4-dom' 2>/dev/null | grep -c "ok installed") -eq 0 ];then
+        echo "PHP 7.4 dom no està instal·lat." >>/script/registre.txt
+        echo "PHP 7.4 dom no està instal·lat."
         apt-get -y install php7.4-dom >/dev/null 2>&1
         if [ $? -eq 0 ]; then
                 echo "Paquet php7.4-dom instal·lat correctament." >>/script/registre.txt
@@ -254,6 +256,8 @@ fi
 
 # Instal·lació del paquet php7.4-simplexml
 if [ $(dpkg-query -W -f='${Status}' 'php7.4-simplexml' 2>/dev/null | grep -c "ok installed") -eq 0 ];then
+        echo "PHP 7.4 simplexml no està instal·lat." >>/script/registre.txt
+        echo "PHP 7.4 simplexml no està instal·lat."
         apt-get -y install php7.4-simplexml >/dev/null 2>&1
         if [ $? -eq 0 ]; then
                 echo "Paquet php7.4-simplexml instal·lat correctament." >>/script/registre.txt
@@ -270,6 +274,8 @@ fi
 
 # Instal·lació del paquet php7.4-curl
 if [ $(dpkg-query -W -f='${Status}' 'php7.4-curl' 2>/dev/null | grep -c "ok installed") -eq 0 ];then
+        echo "PHP 7.4 curl no està instal·lat." >>/script/registre.txt
+        echo "PHP 7.4 curl no està instal·lat."
         apt-get -y install php7.4-curl >/dev/null 2>&1
         if [ $? -eq 0 ]; then
                 echo "Paquet php7.4-curl instal·lat correctament." >>/script/registre.txt
@@ -285,6 +291,8 @@ fi
 
 # Instal·lació del paquet php7.4-gd
 if [ $(dpkg-query -W -f='${Status}' 'php7.4-gd' 2>/dev/null | grep -c "ok installed") -eq 0 ];then
+        echo "PHP 7.4 gd no està instal·lat." >>/script/registre.txt
+        echo "PHP 7.4 gd no està instal·lat."
         apt-get -y install php7.4-gd >/dev/null 2>&1
         if [ $? -eq 0 ]; then
                 echo "Paquet php7.4-gd instal·lat correctament." >>/script/registre.txt
@@ -301,6 +309,8 @@ fi
 
 # Instal·lació del paquet php7.4-intl
 if [ $(dpkg-query -W -f='${Status}' 'php7.4-intl' 2>/dev/null | grep -c "ok installed") -eq 0 ];then
+        echo "PHP 7.4 intl no està instal·lat." >>/script/registre.txt
+        echo "PHP 7.4 intl no està instal·lat."
         apt-get -y install php7.4-intl >/dev/null 2>&1
         if [ $? -eq 0 ]; then
                 echo "Paquet php7.4-intl instal·lat correctament." >>/script/registre.txt
@@ -317,6 +327,8 @@ fi
 
 # Instal·lació del paquet php7.4-ldap
 if [ $(dpkg-query -W -f='${Status}' 'php7.4-ldap' 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
+        echo "PHP 7.4 ldap no està instal·lat." >>/script/registre.txt
+        echo "PHP 7.4 ldap no està instal·lat."
         apt-get -y install php7.4-ldap >/dev/null 2>&1
         if [ $? -eq 0 ];then
                 echo "Paquet php7.4-ldap instal·lat correctament." >>/script/registre.txt
@@ -332,7 +344,9 @@ else
 fi
 
 # Instal·lació del paquet php7.4-zip
-if [ $(dpkg-query -W -f='${Status}' 'php7.4-zip' 2>/dev/null | grep -c "ok installed") -eq 0 ];then
+if [ $(dpkg-query -W -f='${Status}' 'php7.4-zip' 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
+        echo "PHP 7.4 zip no està instal·lat." >>/script/registre.txt
+        echo "PHP 7.4 zip no està instal·lat."
         apt-get -y install php7.4-zip >/dev/null 2>&1
         if [ $? -eq 0 ];then
                 echo "Paquet php7.4-zip instal·lat correctament." >>/script/registre.txt
@@ -348,7 +362,9 @@ else
 fi
 
 # Instal·lació del paquet php7.4-bz2
-if [ $(dpkg-query -W -f='${Status}' 'php7.4-bz2' 2>/dev/null | grep -c "ok installed") -eq 0 ];then
+if [ $(dpkg-query -W -f='${Status}' 'php7.4-bz2' 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
+        echo "PHP 7.4 bz2 no està instal·lat." >>/script/registre.txt
+        echo "PHP 7.4 bz2 no està instal·lat."
         apt-get -y install php7.4-bz2 >/dev/null 2>&1
         if [ $? -eq 0 ];then
                 echo "Paquet php7.4-bz2 instal·lat correctament." >>/script/registre.txt
@@ -363,7 +379,9 @@ else
 fi
 
 # Instal·lació del paquet php7.4-mbstring
-if [ $(dpkg-query -W -f='${Status}' 'php7.4-mbstring' 2>/dev/null | grep -c "ok installed") -eq 0 ];then
+if [ $(dpkg-query -W -f='${Status}' 'php7.4-mbstring' 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
+        echo "PHP 7.4 mbstring no està instal·lat." >>/script/registre.txt
+        echo "PHP 7.4 mbstring no està instal·lat."
         apt-get -y install php7.4-mbstring >/dev/null 2>&1
         if [ $? -eq 0 ];then
                 echo "Paquet php7.4-mbstring instal·lat correctament." >>/script/registre.txt
@@ -379,7 +397,9 @@ else
 fi
 
 # Instal·lació del paquet php7.4-imagick
-if [ $(dpkg-query -W -f='${Status}' 'php7.4-imagick' 2>/dev/null | grep -c "ok installed") -eq 0 ];then
+if [ $(dpkg-query -W -f='${Status}' 'php7.4-imagick' 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
+        echo "PHP 7.4 imagick no està instal·lat." >>/script/registre.txt
+        echo "PHP 7.4 imagick no està instal·lat."
         apt-get -y install php7.4-imagick >/dev/null 2>&1
         if [ $? -eq 0 ];then
                 echo "Paquet php7.4-imagick instal·lat correctament." >>/script/registre.txt
