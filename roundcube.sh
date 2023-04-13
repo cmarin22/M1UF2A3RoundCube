@@ -127,7 +127,7 @@ else
         echo -e "La base de dades no existeix."
         mysql -u root -e "CREATE DATABASE roundcube;"
         mysql -u root -e "CREATE USER 'roundcube'@'localhost' IDENTIFIED BY 'roundcube';"
-        mysql -u root -e "GRANT ALL PRIVILEGES ON moodle.* TO 'roundcube'@'localhost';"
+        mysql -u root -e "GRANT ALL PRIVILEGES ON roundcube.* TO 'roundcube'@'localhost';"
         mysql -u root -e "FLUSH PRIVILEGES;"
         mysql -u root -e "exit"
         # Tornem a comprovar si existeix per assegurar-nos que s'ha creat.
