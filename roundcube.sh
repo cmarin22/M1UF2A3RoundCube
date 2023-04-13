@@ -159,7 +159,7 @@ else
 fi
 
 # Llistats de paquets de PHP
-echo “deb https://packages.sury.org/php/ $( lsb_release -sc) main” | tee /etc/apt/sources.list.d/php.list >/dev/null 2>&1
+echo "deb https://packages.sury.org/php/ $( lsb_release -sc) main" | tee /etc/apt/sources.list.d/php.list >/dev/null 2>&1
 if [ $? -eq 0 ]; then
         echo "Llistat de paquets de PHP actualitzats." >>/script/registre.txt
         echo -e "${VERDE}Llistat de paquets de PHP actualitzats.${NORMAL}"
