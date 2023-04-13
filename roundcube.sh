@@ -202,30 +202,6 @@ else
         echo -e "${VERDE}PHP7.4 ja està instal·lat.${NORMAL}"
 fi
 
-
-# Les funciones a2dismod y a2enmod no funcionen quan actualitzem els repositoris per instal·lar PHP7.4 (Si la màquina té interfície gràfica)
-# Deshabilitar PHP 7.3
-a2dismod php7.3 >/dev/null
-if [ $? -eq 0 ];then
-        echo "PHP 7.3 deshabilitat correctament." >>/script/registre.txt
-        echo -e "${VERDE}PHP 7.3 deshabilitat correctament.${NORMAL}"
-else
-        echo -e "${ROJO}PHP 7.3 no s'ha pogut deshabilitar correctament.${NORMAL}" >>/script/registre.txt
-        echo -e "${ROJO}PHP 7.3 no s'ha pogut deshabilitar correctament.${NORMAL}"
-        exit
-fi
-
-# Habilitar PHP 7.4
-a2enmod php7.4 >/dev/null
-if [ $? -eq 0 ];then
-        echo "PHP 7.4 habilitat correctament." >>/script/registre.txt
-        echo -e "${VERDE}PHP 7.4 habilitat correctament.${NORMAL}"
-else
-        echo -e "${ROJO}PHP 7.4 no s'ha pogut habilitar correctament.${NORMAL}" >>/script/registre.txt
-        echo -e "${ROJO}PHP 7.4 no s'ha pogut habilitar correctament.${NORMAL}"
-        exit
-fi
-
 # Instal·lació del paquet php7.4-mysql
 if [ $(dpkg-query -W -f='${Status}' 'php7.4-mysql' 2>/dev/null | grep -c "ok installed") -eq 0 ];then
         echo "PHP 7.4 MySQL no està instal·lat." >>/script/registre.txt
@@ -294,7 +270,8 @@ if [ $(dpkg-query -W -f='${Status}' 'php7.4-curl' 2>/dev/null | grep -c "ok inst
                 exit
         fi
 else
-        echo -e "${VERDE}php7.4-curl ja està instal·lat.${NORMAL}"
+        echo -e "${VERDE}El paquet php7.4-curl ja està instal·lat.${NORMAL}" >>/script/registre.txt
+        echo -e "${VERDE}El paquet php7.4-curl ja està instal·lat.${NORMAL}"
 fi
 
 # Instal·lació del paquet php7.4-gd
