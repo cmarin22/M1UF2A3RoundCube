@@ -401,14 +401,13 @@ fi
 # Comprovar PHP 7.4
 valor=$(php --version | grep -c "PHP 7.4")
 if [ $valor -eq 0 ]; then
-        echo "${ROJO}La versió de PHP que s'està utilitzant no és la 7.4.${NORMAL}" >>/script/registre.txt
-        echo "${ROJO}La versió de PHP que s'està utilitzant no és la 7.4.${NORMAL}"
+        echo -e "${ROJO}La versió de PHP que s'està utilitzant no és la 7.4.${NORMAL}" >>/script/registre.txt
+        echo -e "${ROJO}La versió de PHP que s'està utilitzant no és la 7.4.${NORMAL}"
         exit
 else
-        echo "${VERDE}La versió de PHP que s'està utilitzant és la 7.4.${NORMAL}" >>/script/registre.txt
-        echo "${VERDE}La versió de PHP que s'està utilitzant és la 7.4.${NORMAL}"
+        echo -e "${VERDE}La versió de PHP que s'està utilitzant és la 7.4.${NORMAL}" >>/script/registre.txt
+        echo -e "${VERDE}La versió de PHP que s'està utilitzant és la 7.4.${NORMAL}"
 fi
-
 
 # Reinicar Apache2
 systemctl restart apache2
