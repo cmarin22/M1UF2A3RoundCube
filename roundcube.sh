@@ -398,27 +398,47 @@ else
         echo -e "${VERDE}El paquet php7.4-imagick ja està instal·lat.${NORMAL}"
 fi
 
-# Deshabilitar PHP 7.3
-a2dismod php7.3
-if [ $? -eq 0 ];then
-        echo "PHP 7.3 deshabilitat correctament." >>/script/registre.txt
-        echo -e "${VERDE}PHP 7.3 deshabilitat correctament.${NORMAL}"
+# Comprovar PHP 7.4
+if [ $(dpkg-query -W -f='${Status}' 'php --version' 2>/dev/null | grep -c "PHP 7.4") -eq 0 ]; then
+        echo "PHP 7.4 no està instal·lat." >>/script/registre.txt
+        echo "PHP 7.4 no està funcionant."
 else
-        echo -e "${ROJO}PHP 7.3 no s'ha pogut deshabilitar correctament.${NORMAL}" >>/script/registre.txt
-        echo -e "${ROJO}PHP 7.3 no s'ha pogut deshabilitar correctament.${NORMAL}"
+        echo "PHP 7.4 està funcionant." >>/script/registre.txt
+        echo "PHP 7.4 està funcionant."
+fi
+
+# Reinicar Apache2
+systemctl restart apache2
+if [ $? -eq 0 ];then
+        echo "Apache reiniciat." >>/script/registre.txt
+        echo -e "${VERDE}Apache reiniciat.${NORMAL}"
+else
+        echo  "Apache no reiniciat.">>/script/registre.txt
+        echo -e "${ROJO}Apache no reiniciat.${NORMAL}"
         exit
 fi
 
+# Deshabilitar PHP 7.3
+#a2dismod php7.3
+#if [ $? -eq 0 ];then
+#        echo "PHP 7.3 deshabilitat correctament." >>/script/registre.txt
+#        echo -e "${VERDE}PHP 7.3 deshabilitat correctament.${NORMAL}"
+#else
+#        echo -e "${ROJO}PHP 7.3 no s'ha pogut deshabilitar correctament.${NORMAL}" >>/script/registre.txt
+#        echo -e "${ROJO}PHP 7.3 no s'ha pogut deshabilitar correctament.${NORMAL}"
+#        exit
+#fi
+
 # Habilitar PHP 7.4
-a2enmod php7.4
-if [ $? -eq 0 ];then
-        echo "PHP 7.4 habilitat correctament." >>/script/registre.txt
-        echo -e "${VERDE}PHP 7.4 habilitat correctament.${NORMAL}"
-else
-        echo -e "${ROJO}PHP 7.4 no s'ha pogut habilitar correctament.${NORMAL}" >>/script/registre.txt
-        echo -e "${ROJO}PHP 7.4 no s'ha pogut habilitar correctament.${NORMAL}"
-        exit
-fi
+#a2enmod php7.4
+#if [ $? -eq 0 ];then
+#        echo "PHP 7.4 habilitat correctament." >>/script/registre.txt
+#        echo -e "${VERDE}PHP 7.4 habilitat correctament.${NORMAL}"
+#else
+#        echo -e "${ROJO}PHP 7.4 no s'ha pogut habilitar correctament.${NORMAL}" >>/script/registre.txt
+#        echo -e "${ROJO}PHP 7.4 no s'ha pogut habilitar correctament.${NORMAL}"
+#        exit
+#fi
 
 # PART 4 - DESCÀRREGA DE ROUNDCUBE ################################################################################
 # Creació del directori on descarregarem Roundcube
