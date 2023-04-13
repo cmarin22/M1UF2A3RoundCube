@@ -140,28 +140,6 @@ else
 fi
 
 # PART 3 - DEPENDÈNCIES DE PHP ################################################################################
-# Actualització dels repositoris
-apt-get update >/dev/null 2>&1
-if [ $? -eq 0 ]; then
-        echo "Repositoris de Linux actualitzats correctament." >>/script/registre.txt
-        echo -e "${VERDE}Repositoris de Linux actualitzats correctament.${NORMAL}"
-else
-        echo -e "${ROJO}No s'han pogut actualitzat els repositoris de Linux, potser no tens internet.${NORMAL}" >>/script/registre.txt
-        echo -e "${ROJO}No s'han pogut actualitzat els repositoris de Linux, potser no tens internet.${NORMAL}"
-        exit
-fi
-
-# Actualització dels repositoris (tots)
-apt-get upgrade >/dev/null 2>&1
-if [ $? -eq 0 ]; then
-        echo "Repositoris de Linux actualitzats correctament (tots)." >>/script/registre.txt
-        echo -e "${VERDE}Repositoris de Linux actualitzats correctament (tots).${NORMAL}"
-else
-        echo -e "${ROJO}No s'han pogut actualitzat (tots) els repositoris de Linux, potser no tens internet.${NORMAL}" >>/script/registre.txt
-        echo -e "${ROJO}No s'han pogut actualitzat (tots) els repositoris de Linux, potser no tens internet.${NORMAL}"
-        exit
-fi
-
 # Repositoris de PHP lsb-release, apt-transport-https i ca-certificate
 apt -y install lsb-release apt-transport-https ca-certificates >/dev/null 2>&1
 if [ $? -eq 0 ]; then
@@ -172,11 +150,6 @@ else
         echo -e "${ROJO}Repositoris de PHP lsb-release, apt-transport-https i ca-certificates no instal·lats correctament.${NORMAL}"
         exit
 fi
-
-#apt-get update
-#apt-get install php7.4
-#a2dismod php7.3
-#a2enmod php7.4
 
 # Paquet apt.gpg de PHP
 wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg >/dev/null 2>&1
@@ -197,6 +170,17 @@ if [ $? -eq 0 ]; then
 else
         echo -e "${ROJO}Llistat de paquets de PHP no actualitzats.${NORMAL}" >>/script/registre.txt
         echo -e "${ROJO}Llistat de paquets de PHP no actualitzats.${NORMAL}"
+        exit
+fi
+
+# Actualització dels repositoris
+apt-get update >/dev/null 2>&1
+if [ $? -eq 0 ]; then
+        echo "Repositoris de Linux actualitzats correctament." >>/script/registre.txt
+        echo -e "${VERDE}Repositoris de Linux actualitzats correctament.${NORMAL}"
+else
+        echo -e "${ROJO}No s'han pogut actualitzat els repositoris de Linux, potser no tens internet.${NORMAL}" >>/script/registre.txt
+        echo -e "${ROJO}No s'han pogut actualitzat els repositoris de Linux, potser no tens internet.${NORMAL}"
         exit
 fi
 
