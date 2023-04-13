@@ -202,6 +202,30 @@ else
         echo -e "${VERDE}PHP7.4 ja està instal·lat.${NORMAL}"
 fi
 
+
+# Les funciones a2dismod y a2enmod no funcionen quan actualitzem els repositoris per instal·lar PHP7.4 (Si la màquina té interfície gràfica)
+# Deshabilitar PHP 7.3
+a2dismod php7.3
+if [ $? -eq 0 ];then
+        echo "PHP 7.3 deshabilitat correctament." >>/script/registre.txt
+        echo -e "${VERDE}PHP 7.3 deshabilitat correctament.${NORMAL}"
+else
+        echo -e "${ROJO}PHP 7.3 no s'ha pogut deshabilitar correctament.${NORMAL}" >>/script/registre.txt
+        echo -e "${ROJO}PHP 7.3 no s'ha pogut deshabilitar correctament.${NORMAL}"
+        exit
+fi
+
+# Habilitar PHP 7.4
+a2enmod php7.4
+if [ $? -eq 0 ];then
+        echo "PHP 7.4 habilitat correctament." >>/script/registre.txt
+        echo -e "${VERDE}PHP 7.4 habilitat correctament.${NORMAL}"
+else
+        echo -e "${ROJO}PHP 7.4 no s'ha pogut habilitar correctament.${NORMAL}" >>/script/registre.txt
+        echo -e "${ROJO}PHP 7.4 no s'ha pogut habilitar correctament.${NORMAL}"
+        exit
+fi
+
 # Instal·lació del paquet php7.4-mysql
 if [ $(dpkg-query -W -f='${Status}' 'php7.4-mysql' 2>/dev/null | grep -c "ok installed") -eq 0 ];then
         echo "PHP 7.4 MySQL no està instal·lat." >>/script/registre.txt
@@ -398,50 +422,38 @@ else
         echo -e "${VERDE}El paquet php7.4-imagick ja està instal·lat.${NORMAL}"
 fi
 
-# Comprovar PHP 7.4
-valor=$(php --version | grep -c "PHP 7.4")
-if [ $valor -eq 0 ]; then
-        echo -e "${ROJO}La versió de PHP que s'està utilitzant no és la 7.4.${NORMAL}" >>/script/registre.txt
-        echo -e "${ROJO}La versió de PHP que s'està utilitzant no és la 7.4.${NORMAL}"
-        exit
-else
-        echo -e "${VERDE}La versió de PHP que s'està utilitzant és la 7.4.${NORMAL}" >>/script/registre.txt
-        echo -e "${VERDE}La versió de PHP que s'està utilitzant és la 7.4.${NORMAL}"
-fi
-
-# Reinicar Apache2
-systemctl restart apache2
-if [ $? -eq 0 ];then
-        echo "Apache reiniciat correctament." >>/script/registre.txt
-        echo -e "${VERDE}Apache reiniciat correctament.${NORMAL}"
-else
-        echo  "Apache no reiniciat correctament.">>/script/registre.txt
-        echo -e "${ROJO}Apache no reiniciat correctament.${NORMAL}"
-        exit
-fi
-
-# Les funciones a2dismod y a2enmod no funcionen quan actualitzem els repositoris per instal·lar PHP7.4
-
+# Les funciones a2dismod y a2enmod no funcionen quan actualitzem els repositoris per instal·lar PHP7.4 (Si la màquina té interfície gràfica)
 # Deshabilitar PHP 7.3
-#a2dismod php7.3
-#if [ $? -eq 0 ];then
-#        echo "PHP 7.3 deshabilitat correctament." >>/script/registre.txt
-#        echo -e "${VERDE}PHP 7.3 deshabilitat correctament.${NORMAL}"
-#else
-#        echo -e "${ROJO}PHP 7.3 no s'ha pogut deshabilitar correctament.${NORMAL}" >>/script/registre.txt
-#        echo -e "${ROJO}PHP 7.3 no s'ha pogut deshabilitar correctament.${NORMAL}"
-#        exit
-#fi
+a2dismod php7.3
+if [ $? -eq 0 ];then
+        echo "PHP 7.3 deshabilitat correctament." >>/script/registre.txt
+        echo -e "${VERDE}PHP 7.3 deshabilitat correctament.${NORMAL}"
+else
+        echo -e "${ROJO}PHP 7.3 no s'ha pogut deshabilitar correctament.${NORMAL}" >>/script/registre.txt
+        echo -e "${ROJO}PHP 7.3 no s'ha pogut deshabilitar correctament.${NORMAL}"
+        exit
+fi
 
 # Habilitar PHP 7.4
-#a2enmod php7.4
-#if [ $? -eq 0 ];then
-#        echo "PHP 7.4 habilitat correctament." >>/script/registre.txt
-#        echo -e "${VERDE}PHP 7.4 habilitat correctament.${NORMAL}"
-#else
-#        echo -e "${ROJO}PHP 7.4 no s'ha pogut habilitar correctament.${NORMAL}" >>/script/registre.txt
-#        echo -e "${ROJO}PHP 7.4 no s'ha pogut habilitar correctament.${NORMAL}"
+a2enmod php7.4
+if [ $? -eq 0 ];then
+        echo "PHP 7.4 habilitat correctament." >>/script/registre.txt
+        echo -e "${VERDE}PHP 7.4 habilitat correctament.${NORMAL}"
+else
+        echo -e "${ROJO}PHP 7.4 no s'ha pogut habilitar correctament.${NORMAL}" >>/script/registre.txt
+        echo -e "${ROJO}PHP 7.4 no s'ha pogut habilitar correctament.${NORMAL}"
+        exit
+fi
+
+# Comprovar PHP 7.4
+#valor=$(php --version | grep -c "PHP 7.4")
+#if [ $valor -eq 0 ]; then
+#        echo -e "${ROJO}La versió de PHP que s'està utilitzant no és la 7.4.${NORMAL}" >>/script/registre.txt
+#        echo -e "${ROJO}La versió de PHP que s'està utilitzant no és la 7.4.${NORMAL}"
 #        exit
+#else
+#        echo -e "${VERDE}La versió de PHP que s'està utilitzant és la 7.4.${NORMAL}" >>/script/registre.txt
+#        echo -e "${VERDE}La versió de PHP que s'està utilitzant és la 7.4.${NORMAL}"
 #fi
 
 # PART 4 - DESCÀRREGA DE ROUNDCUBE ################################################################################
@@ -506,6 +518,17 @@ if [ $? -eq 0 ];then
 else
         echo  "No s'han assignat els permisos al directori html correctament.">>/script/registre.txt
         echo -e "${ROJO}No s'han assignat els permisos al directori html correctament.${NORMAL}"
+        exit
+fi
+
+# Reinicar Apache2
+systemctl restart apache2
+if [ $? -eq 0 ];then
+        echo "Apache reiniciat correctament." >>/script/registre.txt
+        echo -e "${VERDE}Apache reiniciat correctament.${NORMAL}"
+else
+        echo  "Apache no reiniciat correctament.">>/script/registre.txt
+        echo -e "${ROJO}Apache no reiniciat correctament.${NORMAL}"
         exit
 fi
            
