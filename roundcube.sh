@@ -221,9 +221,9 @@ else
 fi
 
 # Instal·lació del paquet php7.4-dom
-if [ $(dpkg-query -W -f='${Status}' 'php7.4-dom' 2>/dev/null | grep -c "ok installed") -eq 0 ];then
-        echo "PHP 7.4 dom no està instal·lat." >>/script/registre.txt
-        echo "PHP 7.4 dom no està instal·lat."
+#if [ $(dpkg-query -W -f='${Status}' 'php7.4-dom' 2>/dev/null | grep -c "ok installed") -eq 0 ];then
+#        echo "PHP 7.4 dom no està instal·lat." >>/script/registre.txt
+#        echo "PHP 7.4 dom no està instal·lat."
         apt-get -y install php7.4-dom >/dev/null 2>&1
         if [ $? -eq 0 ]; then
                 echo "Paquet php7.4-dom instal·lat correctament." >>/script/registre.txt
@@ -233,15 +233,15 @@ if [ $(dpkg-query -W -f='${Status}' 'php7.4-dom' 2>/dev/null | grep -c "ok insta
                 echo -e "${ROJO}El paquet php7.4-dom no s'ha instal·lat correctament.${NORMAL}"
                 exit
         fi
-else
-        echo -e "${VERDE}El paquet php7.4-dom ja està instal·lat.${NORMAL}" >>/script/registre.txt
-        echo -e "${VERDE}El paquet php7.4-dom ja està instal·lat.${NORMAL}"
-fi
+#else
+#        echo -e "${VERDE}El paquet php7.4-dom ja està instal·lat.${NORMAL}" >>/script/registre.txt
+#        echo -e "${VERDE}El paquet php7.4-dom ja està instal·lat.${NORMAL}"
+#fi
 
 # Instal·lació del paquet php7.4-simplexml
-if [ $(dpkg-query -W -f='${Status}' 'php7.4-simplexml' 2>/dev/null | grep -c "ok installed") -eq 0 ];then
-        echo "PHP 7.4 simplexml no està instal·lat." >>/script/registre.txt
-        echo "PHP 7.4 simplexml no està instal·lat."
+#if [ $(dpkg-query -W -f='${Status}' 'php7.4-simplexml' 2>/dev/null | grep -c "ok installed") -eq 0 ];then
+#        echo "PHP 7.4 simplexml no està instal·lat." >>/script/registre.txt
+#        echo "PHP 7.4 simplexml no està instal·lat."
         apt-get -y install php7.4-simplexml >/dev/null 2>&1
         if [ $? -eq 0 ]; then
                 echo "Paquet php7.4-simplexml instal·lat correctament." >>/script/registre.txt
@@ -251,10 +251,10 @@ if [ $(dpkg-query -W -f='${Status}' 'php7.4-simplexml' 2>/dev/null | grep -c "ok
                 echo -e "${ROJO}php7.4-simplexml no s'ha instal·lat.${NORMAL}"
                 exit
         fi
-else
-        echo -e "${VERDE}El paquet php7.4-simplexml ja està instal·lat.${NORMAL}" >>/script/registre.txt
-        echo -e "${VERDE}El paquet php7.4-simplexml ja està instal·lat.${NORMAL}"
-fi
+#else
+#        echo -e "${VERDE}El paquet php7.4-simplexml ja està instal·lat.${NORMAL}" >>/script/registre.txt
+#        echo -e "${VERDE}El paquet php7.4-simplexml ja està instal·lat.${NORMAL}"
+#fi
 
 # Instal·lació del paquet php7.4-curl
 if [ $(dpkg-query -W -f='${Status}' 'php7.4-curl' 2>/dev/null | grep -c "ok installed") -eq 0 ];then
@@ -401,7 +401,7 @@ fi
 
 # Les funciones a2dismod y a2enmod no funcionen quan actualitzem els repositoris per instal·lar PHP7.4 (Si la màquina té interfície gràfica)
 # Deshabilitar PHP 7.3
-a2dismod php7.3 2>/dev/null
+a2dismod php7.3 >/dev/null 2>&1
 if [ $? -eq 0 ];then
         echo "PHP 7.3 deshabilitat correctament." >>/script/registre.txt
         echo -e "${VERDE}PHP 7.3 deshabilitat correctament.${NORMAL}"
@@ -412,7 +412,7 @@ else
 fi
 
 # Habilitar PHP 7.4
-a2enmod php7.4 2>/dev/null
+a2enmod php7.4 >/dev/null 2>&1
 if [ $? -eq 0 ];then
         echo "PHP 7.4 habilitat correctament." >>/script/registre.txt
         echo -e "${VERDE}PHP 7.4 habilitat correctament.${NORMAL}"
