@@ -157,14 +157,12 @@ else
 fi
 
 #Automatización
-tee /etc/systemd/system/kms.service <<EOF
-[Unit]
+echo "[Unit]
 After=network.target
 [Service]
 ExecStart=/usr/bin/python3 /srv/kms/py-kms/pykms_Server.py
 [Install]
-WantedBy=multi-user.target
-EOF
+WantedBy=multi-user.target" | tee /etc/systemd/system/kms.service
 
 systemctl daemon-reload >/dev/null 2>&1
 systemctl start kms.service >/dev/null 2>&1
