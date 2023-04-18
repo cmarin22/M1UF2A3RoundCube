@@ -87,7 +87,7 @@ fi
 
 #Execució servei kms
 cd /srv/kms/py-kms
-pyhton3 pykms_Server.py >/dev/null 2>&1
+python3 pykms_Server.py >/dev/null 2>&1
 if [ $? -eq 0 ]; then
         echo "Instal·lació de KMS instal·lat correctament." >>/script/registre.txt
         echo -e "${VERDE}Instal·lació de KMS instal·lat correctament.${NORMAL}"
