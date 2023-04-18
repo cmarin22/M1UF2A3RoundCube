@@ -10,7 +10,7 @@ ROJOBK='\e[41m'         # Fons Vermell
 On_Purple='\033[45m'    # Fons Lila
 
 # PART 0 - COMPROVAR QUE SOM L'USUARI ROOT I ACTUALITZACIÓ REPOSITORIS ################################################################################
-echo -e "${On_Purple}SCRIPT AUTOMÀTIC PER INSTAL·LAR EL SERVIDOR WORDPRESS${NORMAL}"
+echo -e "${On_Purple}SCRIPT AUTOMÀTIC PER INSTAL·LAR EL SERVIDOR GLPI${NORMAL}"
 #Comprovació de l’usuari
 #Aquest condicional utilitza la comanda “whoami”, serveix per identificar l’usuari actual
 #Compara la variable si es == a “root” en cas afirmatiu escriu “Ets root.” i en cas negatiu et diu que no ho ets i surt de l’script
@@ -120,7 +120,7 @@ else
 fi
 
 # PART 2 - BASE DE DADES ################################################################################
-#Comprovem si la base de dades moodle existeix
+#Comprovem si la base de dades GLPI existeix
 dbname="glpi"
 if [ -d "/var/lib/mysql/$dbname" ]; then
         echo -e "${VERDE}La base de dades glpi existeix.${NORMAL}"
@@ -440,25 +440,25 @@ mkdir /opt 2>/dev/null
 cd /opt/ 2>/dev/null
 rm -r glpi* 2>/dev/null
 
-# Descarregar l'arxiu de Moodle
+# Descarregar l'arxiu de GLPI
 wget https://github.com/glpi-project/glpi/releases/download/10.0.5/glpi-10.0.5.tgz >/dev/null 2>&1           
 if [ $? -eq 0 ];then
-        echo "Arxiu d'instal·lació de Moodle descarregat correctament." >>/script/registre.txt
-        echo -e "${VERDE}Arxiu d'instal·lació de Moodle descarregat correctament.${NORMAL}"
+        echo "Arxiu d'instal·lació de GLPI descarregat correctament." >>/script/registre.txt
+        echo -e "${VERDE}Arxiu d'instal·lació de GLPI descarregat correctament.${NORMAL}"
 else
-        echo  "L'arxiu de Moodle no s'ha pogut descarregar.">>/script/registre.txt
-        echo -e "${ROJO}L'arxiu de Moodle no s'ha pogut descarregar.${NORMAL}"
+        echo  "L'arxiu de Glpi no s'ha pogut descarregar.">>/script/registre.txt
+        echo -e "${ROJO}L'arxiu de GLPI no s'ha pogut descarregar.${NORMAL}"
         exit
 fi
 
-# Decomprimir l'arxiu de Moodle
+# Decomprimir l'arxiu de GLPI
 tar -xvzf glpi-10.0.5.tgz >/dev/null 2>&1
 if [ $? -eq 0 ]; then
-        echo "Arxiu d'instal·lació de Moodle descomprimit correctament." >>/script/registre.txt
-        echo -e "${VERDE}Arxiu d'instal·lació de Moodle descomprimit correctament.${NORMAL}"
+        echo "Arxiu d'instal·lació de GLPI descomprimit correctament." >>/script/registre.txt
+        echo -e "${VERDE}Arxiu d'instal·lació de GLPI descomprimit correctament.${NORMAL}"
 else
-        echo  "L'arxiu de Moodle no s'ha pogut descomprimir.">>/script/registre.txt
-        echo -e "${ROJO}L'arxiu de Moodle no s'ha pogut descomprimir.${NORMAL}"
+        echo  "L'arxiu de GLPI no s'ha pogut descomprimir.">>/script/registre.txt
+        echo -e "${ROJO}L'arxiu de GLPI no s'ha pogut descomprimir.${NORMAL}"
         exit
 fi
 
@@ -475,7 +475,7 @@ else
 	exit
 fi
 
-# Moure el contingut de RoundCube al directori html
+# Moure el contingut de GLPI al directori html
 mv glpi/ /var/www/html/ 2>/dev/null
 if [ $? -eq 0 ];then
         echo "Contigut de GLPI mogut al directori html correctament." >>/script/registre.txt
@@ -513,7 +513,7 @@ systemctl restart apache2
 if [ $? -eq 0 ];then
         echo "Apache reiniciat correctament." >>/script/registre.txt
         echo -e "${VERDE}Apache reiniciat correctament.${NORMAL}"
-        echo -e "${On_Purple}PER ACCEDIR A MOODLE: http://127.0.0.1:port/installer/ AL NAVEGADOR${NORMAL}"
+        echo -e "${On_Purple}PER ACCEDIR A GLPI: http://127.0.0.1:port/installer/ AL NAVEGADOR${NORMAL}"
 else
         echo  "Apache no reiniciat correctament.">>/script/registre.txt
         echo -e "${ROJO}Apache no reiniciat correctament.${NORMAL}"
