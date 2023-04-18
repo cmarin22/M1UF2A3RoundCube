@@ -542,7 +542,7 @@ systemctl restart apache2
 if [ $? -eq 0 ];then
         echo "Apache reiniciat correctament." >>/script/registre.txt
         echo -e "${VERDE}Apache reiniciat correctament.${NORMAL}"
-        echo -e "${On_Purple}PER ACCEDIR A MOODLE: http://127.0.0.1:port/installer/ AL NAVEGADOR${NORMAL}"
+        echo -e "${On_Purple}PER ACCEDIR A WORDPRESS: http://127.0.0.1:port/installer/ AL NAVEGADOR${NORMAL}"
 else
         echo  "Apache no reiniciat correctament.">>/script/registre.txt
         echo -e "${ROJO}Apache no reiniciat correctament.${NORMAL}"
