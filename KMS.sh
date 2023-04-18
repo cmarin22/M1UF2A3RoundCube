@@ -84,6 +84,38 @@ fi
 
 #Execució servei kms
 cd /srv/kms/py-kms
-pyhton3 pykms_Server.py
+pyhton3 pykms_Server.py >/dev/null 2>&1
+if [ $? -eq 0 ]; then
+        echo "Instal·lació de KMS instal·lat correctament." >>/script/registre.txt
+        echo -e "${VERDE}Instal·lació de KMS instal·lat correctament.${NORMAL}"
+else
+        echo -e "${ROJO}Instal·lació de KMS no instal·lat correctament.${NORMAL}" >>/script/registre.txt
+        echo -e "${ROJO}Instal·lació de KMS no instal·lat correctament.${NORMAL}"
+        exit
+fi
 
+#Automatización
+tee /etc/systemd/system/kms.service <<EOF
+[Unit]
+After=network.target
+[Service]
+ExecStart=/usr/bin/python3 /srv/kms/py-kms/pykms_Server.py
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl daemon-reload >/dev/null 2>&1
+systemctl start kms.service >/dev/null 2>&1
+systemctl enable kms.service >/dev/null 2>&1
+if [ $? -eq 0 ];then
+        echo "KMS reiniciat correctament." >>/script/registre.txt
+        echo -e "${VERDE}Apache reiniciat correctament.${NORMAL}"
+        echo -e "${On_Purple}Instal·lació KMS fet${NORMAL}"
+else
+        echo  "KMS no reiniciat correctament.">>/script/registre.txt
+        echo -e "${ROJO}KMS no reiniciat correctament.${NORMAL}"
+        exit
+fi
+
+ss -putona
 
