@@ -156,13 +156,23 @@ else
         exit
 fi
 
-#Automatización
-echo "[Unit]
+cd /etc/systemd/system/
+
+# Crear un archivo nuevo llamado "kms.service"
+sudo touch kms.service
+
+# Abrir el archivo para editarlo con permisos de superusuario
+sudo nano kms.service
+
+# Escribe el contenido del archivo de servicio
+echo '[Unit]
 After=network.target
+
 [Service]
 ExecStart=/usr/bin/python3 /srv/kms/py-kms/pykms_Server.py
+
 [Install]
-WantedBy=multi-user.target" | tee /etc/systemd/system/kms.service
+WantedBy=multi-user.target' | sudo tee /etc/systemd/system/kms.service
 
 systemctl daemon-reload >/dev/null 2>&1
 systemctl start kms.service >/dev/null 2>&1
