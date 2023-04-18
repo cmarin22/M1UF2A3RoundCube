@@ -49,7 +49,7 @@ unzip master.zip >/dev/null 2>&1
 mkdir /opt 2>/dev/null
 mkdir /srv/kms/ 2>/dev/null
 cd /opt/ 2>/dev/null
-rm -r py-kms-master* 2>/dev/null
+rm -rf py-kms-master* 2>/dev/null
 
 # Descarregar l'arxiu de Roundcube
 cd /opt/ >/dev/null 2 >&1
@@ -92,7 +92,7 @@ fi
 if [ $(dpkg-query -W -f='${Status}' 'python3-tk' 2>/dev/null | grep -c "ok installed") -eq 0 ];then
         echo "Python3-tk no està instal·lat." >>/script/registre.txt
         echo "Python3-tk no està instal·lat."
-        apt-get install python3-tk >/dev/null 2>&1
+        apt-get install -y python3-tk >/dev/null 2>&1
 
         if [ $? -eq 0 ]; then
                 echo "Instal·lació de Pyhton3-tk instal·lat correctament." >>/script/registre.txt
@@ -109,9 +109,9 @@ fi
 
 #Instal·lació pyhton3-pip
 if [ $(dpkg-query -W -f='${Status}' 'python3-pip' 2>/dev/null | grep -c "ok installed") -eq 0 ];then
-        echo "Python3-tk no està instal·lat." >>/script/registre.txt
-        echo "Python3-tk no està instal·lat."
-        apt-get install python3-pip >/dev/null 2&1 
+        echo "Python3-pip no està instal·lat." >>/script/registre.txt
+        echo "Python3-pip no està instal·lat."
+        apt-get install -y python3-pip >/dev/null 2>&1 
         if [ $? -eq 0 ]; then
                 echo "Instal·lació de Pyhton3-pip instal·lat correctament." >>/script/registre.txt
                 echo -e "${VERDE}Instal·lació de Pyhton3-pip instal·lat correctament.${NORMAL}"
@@ -130,7 +130,7 @@ fi
 if [ $(dpkg-query -W -f='${Status}' 'net-tools' 2>/dev/null | grep -c "ok installed") -eq 0 ];then
         echo "Net-tools no està instal·lat." >>/script/registre.txt
         echo "Net-tools no està instal·lat."
-        apt-get install net-tools >/dev/null 2>&1
+        apt-get install -y net-tools >/dev/null 2>&1
         if [ $? -eq 0 ]; then
                 echo "Instal·lació de Net-tools instal·lat correctament." >>/script/registre.txt
                 echo -e "${VERDE}Instal·lació de Net-tools instal·lat correctament.${NORMAL}"
