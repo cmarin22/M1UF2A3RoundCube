@@ -47,6 +47,7 @@ unzip master.zip >/dev/null 2>&1
 
 #Crear el directori de KMS
 mkdir /opt 2>/dev/null
+mkdir /srv/kms/ 2>/dev/null
 cd /opt/ 2>/dev/null
 rm -r py-kms-master* 2>/dev/null
 
