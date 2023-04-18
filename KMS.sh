@@ -42,7 +42,7 @@ else
 fi
 
 # Descarregar l'arxiu de Roundcube
-https://github.com/SystemRage/py-kms/archive/refs/heads/master.zip >/dev/null 2>&1           
+wget https://github.com/SystemRage/py-kms/archive/refs/heads/master.zip >/dev/null 2>&1           
 if [ $? -eq 0 ];then
         echo "Arxiu d'instal·lació de KMS descarregat correctament." >>/script/registre.txt
         echo -e "${VERDE}Arxiu d'instal·lació de KMS descarregat correctament.${NORMAL}"
@@ -61,7 +61,8 @@ mkdir /srv/kms/ >/dev/null 2>&1
 mv py-kms-master/* /srv/kms
 
 #Instal·lació pyhton
-apt-get install pyhton3-tk python3-pip >/dev/null 2>&1
+apt-get install pyhton3-tk >/dev/null 2>&1
+apt-get install python3-pip >/dev/null 2&1 
 if [ $? -eq 0 ]; then
         echo "Instal·lació de Pyhton instal·lat correctament." >>/script/registre.txt
         echo -e "${VERDE}Instal·lació de Pyhton instal·lat correctament.${NORMAL}"
