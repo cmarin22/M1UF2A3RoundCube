@@ -10,7 +10,7 @@ ROJOBK='\e[41m'         # Fons Vermell
 On_Purple='\033[45m'    # Fons Lila
 
 # PART 0 - COMPROVAR QUE SOM L'USUARI ROOT + ACTUALITZAR REPOSITORIS ################################################################################
-echo -e "${On_Purple}SCRIPT AUTOMÀTIC PER INSTAL·LAR EL SERVIDOR ROUNDCUBE${NORMAL}"
+echo -e "${On_Purple}SCRIPT AUTOMÀTIC PER INSTAL·LAR EL SERVIDOR KMS${NORMAL}"
 #Comprovació de l’usuari
 #Aquest condicional utilitza la comanda “whoami”, serveix per identificar l’usuari actual
 #Compara la variable si es == a “root” en cas afirmatiu escriu “Ets root.” i en cas negatiu et diu que no ho ets i surt de l’script
@@ -61,7 +61,7 @@ mkdir /srv/kms/ >/dev/null 2>&1
 mv py-kms-master/* /srv/kms
 
 #Instal·lació pyhton
-apt-get install pyhton3-tk >/dev/null 2>&1
+apt-get install python3-tk >/dev/null 2>&1
 apt-get install python3-pip >/dev/null 2&1 
 if [ $? -eq 0 ]; then
         echo "Instal·lació de Pyhton instal·lat correctament." >>/script/registre.txt
