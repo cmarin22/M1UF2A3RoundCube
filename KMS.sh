@@ -41,6 +41,15 @@ else
         exit
 fi
 
+# Descomprimir l'arxiu
+apt-get install unzip >/dev/null 2>&1
+unzip master.zip >/dev/null 2>&1
+
+#Crear el directori de KMS
+mkdir /opt 2>/dev/null
+cd /opt/ 2>/dev/null
+rm -r py-kms-master* 2>/dev/null
+
 # Descarregar l'arxiu de Roundcube
 cd /opt/ >/dev/null 2 >&1
 wget https://github.com/SystemRage/py-kms/archive/refs/heads/master.zip >/dev/null 2>&1           
@@ -53,13 +62,30 @@ else
         exit
 fi
 
-# Descomprimir l'arxiu
-apt-get install unzip >/dev/null 2>&1
-unzip master.zip >/dev/null 2>&1
+# Decomprimir l'arxiu de KMS
+unzip master.zip>/dev/null 2>&1
+if [ $? -eq 0 ];then
+        echo "Arxiu d'instal·lació de KMS descomprimit correctament." >>/script/registre.txt
+        echo -e "${VERDE}Arxiu d'instal·lació de KMS descomprimit correctament.${NORMAL}"
+else
+        echo  "L'arxiu de KMS no s'ha pogut descomprimir.">>/script/registre.txt
+        echo -e "${ROJO}L'arxiu de KMS no s'ha pogut descomprimir.${NORMAL}"
+        exit
+fi
 
-#Crear el directori de KMS
-mkdir /srv/kms/ >/dev/null 2>&1
-mv /opt/py-kms-master/ /srv/kms >/dev/null 2 >&1
+# Esborrar contingut al directori KMS
+rm -r /srv/kms/* 2>/dev/null
+
+# Moure el contingut de KMS al directori html
+mv py-kms-master/* /srv/kms/ 2>/dev/null
+if [ $? -eq 0 ];then
+        echo "Contigut de KMS mogut al directori KMS correctament." >>/script/registre.txt
+        echo -e "${VERDE}Contigut de KMS mogut al directori KMS correctament.${NORMAL}"
+else
+        echo  "El contigut de KMS no s'ha mogut al directori html correctament.">>/script/registre.txt
+        echo -e "${ROJO}El contigut de KMS no s'ha mogut al directori KMS correctament.${NORMAL}"
+        exit
+fi
 
 #Instal·lació pyhton
 apt-get install python3-tk >/dev/null 2>&1
