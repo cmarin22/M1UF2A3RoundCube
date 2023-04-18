@@ -88,27 +88,60 @@ else
         exit
 fi
 
-#Instal·lació pyhton
-apt-get install python3-tk >/dev/null 2>&1
-apt-get install python3-pip >/dev/null 2&1 
-if [ $? -eq 0 ]; then
-        echo "Instal·lació de Pyhton instal·lat correctament." >>/script/registre.txt
-        echo -e "${VERDE}Instal·lació de Pyhton instal·lat correctament.${NORMAL}"
+#Instal·lació pyhton3-tk
+if [ $(dpkg-query -W -f='${Status}' 'python3-tk' 2>/dev/null | grep -c "ok installed") -eq 0 ];then
+        echo "Python3-tk no està instal·lat." >>/script/registre.txt
+        echo "Python3-tk no està instal·lat."
+        apt-get install python3-tk >/dev/null 2>&1
+
+        if [ $? -eq 0 ]; then
+                echo "Instal·lació de Pyhton3-tk instal·lat correctament." >>/script/registre.txt
+                echo -e "${VERDE}Instal·lació de Pyhton3-tk instal·lat correctament.${NORMAL}"
+        else
+                echo -e "${ROJO}Instal·lació de Pyhton3-tk no instal·lat correctament.${NORMAL}" >>/script/registre.txt
+                echo -e "${ROJO}Instal·lació de Pyhton3-tk no instal·lat correctament.${NORMAL}"
+                exit
+        fi
 else
-        echo -e "${ROJO}Instal·lació de Pyhton no instal·lat correctament.${NORMAL}" >>/script/registre.txt
-        echo -e "${ROJO}Instal·lació de Pyhton no instal·lat correctament.${NORMAL}"
-        exit
+        echo -e "${VERDE}Python3-tk ja està instal·lat.${NORMAL}" >>/script/registre.txt
+        echo -e "${VERDE}Python3-tk ja està instal·lat.${NORMAL}"
 fi
 
-#Instal·lació net-tools
-apt-get install net-tools >/dev/null 2>&1
-if [ $? -eq 0 ]; then
-        echo "Instal·lació de net-tools instal·lat correctament." >>/script/registre.txt
-        echo -e "${VERDE}Instal·lació de net-tools instal·lat correctament.${NORMAL}"
+#Instal·lació pyhton3-pip
+if [ $(dpkg-query -W -f='${Status}' 'python3-pip' 2>/dev/null | grep -c "ok installed") -eq 0 ];then
+        echo "Python3-tk no està instal·lat." >>/script/registre.txt
+        echo "Python3-tk no està instal·lat."
+        apt-get install python3-pip >/dev/null 2&1 
+        if [ $? -eq 0 ]; then
+                echo "Instal·lació de Pyhton3-pip instal·lat correctament." >>/script/registre.txt
+                echo -e "${VERDE}Instal·lació de Pyhton3-pip instal·lat correctament.${NORMAL}"
+        else
+                echo -e "${ROJO}Instal·lació de Pyhton3-pip no instal·lat correctament.${NORMAL}" >>/script/registre.txt
+                echo -e "${ROJO}Instal·lació de Pyhton3-pip no instal·lat correctament.${NORMAL}"
+                exit
+        fi
 else
-        echo -e "${ROJO}Instal·lació de net-tools no instal·lat correctament.${NORMAL}" >>/script/registre.txt
-        echo -e "${ROJO}Instal·lació de net-tools no instal·lat correctament.${NORMAL}"
-        exit
+        echo -e "${VERDE}Python3-pip ja està instal·lat.${NORMAL}" >>/script/registre.txt
+        echo -e "${VERDE}Python3-pip ja està instal·lat.${NORMAL}"
+fi
+
+        
+#Instal·lació net-tools
+if [ $(dpkg-query -W -f='${Status}' 'net-tools' 2>/dev/null | grep -c "ok installed") -eq 0 ];then
+        echo "Net-tools no està instal·lat." >>/script/registre.txt
+        echo "Net-tools no està instal·lat."
+        apt-get install net-tools >/dev/null 2>&1
+        if [ $? -eq 0 ]; then
+                echo "Instal·lació de Net-tools instal·lat correctament." >>/script/registre.txt
+                echo -e "${VERDE}Instal·lació de Net-tools instal·lat correctament.${NORMAL}"
+        else
+                echo -e "${ROJO}Instal·lació de Net-tools no instal·lat correctament.${NORMAL}" >>/script/registre.txt
+                echo -e "${ROJO}Instal·lació de Net-tools no instal·lat correctament.${NORMAL}"
+                exit
+        fi
+else
+        echo -e "${VERDE}Net-tools ja està instal·lat.${NORMAL}" >>/script/registre.txt
+        echo -e "${VERDE}Net-tools ja està instal·lat.${NORMAL}"
 fi
 
 #Execució servei kms
