@@ -59,8 +59,7 @@ unzip master.zip >/dev/null 2>&1
 
 #Crear el directori de KMS
 mkdir /srv/kms/ >/dev/null 2>&1
-cd /opt/ >/dev/null 2 >&1
-mv py-kms-master/* /srv/kms
+mv /opt/py-kms-master/ /srv/kms >/dev/null 2 >&1
 
 #Instal·lació pyhton
 apt-get install python3-tk >/dev/null 2>&1
