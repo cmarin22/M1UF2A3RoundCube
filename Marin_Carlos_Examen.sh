@@ -40,7 +40,7 @@ echo "+---------------------------------------------+"
 # b)
 mkdir /var/logs
 mkdir /var/logs/registres
-mkdir /var/logs/install
+mkdir /var/logs/registres/install
 touch /var/logs/registres/install/errors.log
 
 c)
