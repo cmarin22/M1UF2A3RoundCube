@@ -145,10 +145,10 @@ fi
 chvt 2
 if [ $? -eq 0 ];then
         echo "Terminal canviat correctament." >>/script/registre.txt
-        echo -e "${VERDE}Terminal canviat correctament.${NORMAL}" >/dev/tty2
+        echo -e "${VERDE}Terminal canviat correctament.${NORMAL}" >/dev/tty1
 else
         echo -e "${ROJO}Terminal no canviat correctament.${NORMAL}" >>/script/registre.txt
-        echo -e "${ROJO}Terminal no canviat correctament.${NORMAL}" >/dev/tty2
+        echo -e "${ROJO}Terminal no canviat correctament.${NORMAL}" >/dev/tty1
         exit
 fi
 
@@ -156,7 +156,7 @@ fi
 #cd /srv/kms/py-kms/ > 2>/dev/null
 # No cal accedir a la carpeta, col·loquem la ruta sencera
 # Executem l'arxiu de KMS desde el terminal 2 perquè funcioni desde el terminal 1
-python3 /srv/kms/py-kms/pykms_Server.py > chvt 1
+python3 /srv/kms/py-kms/pykms_Server.py >/dev/tty1
 
 # Inserir el text a l'arxiu kms.service
 echo -e "[Unit]" > /etc/systemd/system/kms.service
