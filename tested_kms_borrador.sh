@@ -145,10 +145,10 @@ fi
 chvt 2
 if [ $? -eq 0 ];then
         echo "Terminal canviat correctament." >>/script/registre.txt
-        echo -e "${VERDE}Terminal canviat correctament.${NORMAL}" > /dev/tty2
+        echo -e "${VERDE}Terminal canviat correctament.${NORMAL}" >/dev/tty2
 else
         echo -e "${ROJO}Terminal no canviat correctament.${NORMAL}" >>/script/registre.txt
-        echo -e "${ROJO}Terminal no canviat correctament.${NORMAL}" /dev/tty2
+        echo -e "${ROJO}Terminal no canviat correctament.${NORMAL}" >/dev/tty2
         exit
 fi
 
