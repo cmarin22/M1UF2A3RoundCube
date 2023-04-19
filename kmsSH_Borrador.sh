@@ -45,7 +45,7 @@ fi
 # Creació del directori on descarregarem Wordpress
 mkdir /opt 2>/dev/null
 cd /opt/ 2>/dev/null
-rm -r master* 2>/dev/null
+rm -r *master* 2>/dev/null
 
 # Descarregar l'arxiu de KMS
 wget https://github.com/SystemRage/py-kms/archive/refs/heads/master.zip >/dev/null 2>&1           
