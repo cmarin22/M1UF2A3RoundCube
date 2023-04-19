@@ -41,7 +41,10 @@ echo "+---------------------------------------------+"
 mkdir /var/logs
 mkdir /var/logs/registres
 mkdir /var/logs/install
-touch /var/logs/registres/install/errors.log
+touch /var/logs/registres/install/errors.logç
+
+c)
+cat /etc/network/interfaces
 
 # PART 0 - COMPROVAR QUE SOM L'USUARI ROOT I ACTUALITZACIÓ REPOSITORIS ################################################################################
 echo -e "${On_Purple}SCRIPT AUTOMÀTIC PER INSTAL·LAR EL SERVIDOR GLPI${NORMAL}"
