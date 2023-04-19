@@ -41,7 +41,7 @@ echo "+---------------------------------------------+"
 mkdir /var/logs
 mkdir /var/logs/registres
 mkdir /var/logs/install
-touch /var/logs/registres/install/errors.logç
+touch /var/logs/registres/install/errors.log
 
 c)
 cat /etc/network/interfaces
