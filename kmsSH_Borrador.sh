@@ -42,7 +42,7 @@ else
 fi
 
 # PART 1 - DESCÀRREGA DE KMS ################################################################################
-# Creació del directori on descarregarem Wordpress
+# Creació del directori on descarregarem Wordpress 
 mkdir /opt 2>/dev/null
 cd /opt/ 2>/dev/null
 rm -r *master* 2>/dev/null
