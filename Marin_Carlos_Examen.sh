@@ -3,9 +3,9 @@ clear
 # Amb netegem el terminal
 
 # Declaració dels diferents colors
-NORMAL='\e[0m'          # Color Base
-ROJO='\e[31m'           # Color Vermell  
-VERDE='\e[32m'          # Color Verd
+NORMAL='\033[0;35m' 
+VERDE='\033[0;36m'    # Color Base
+ROJO='\033[0;33m'       # Color Vermell  
 ROJOBK='\e[41m'         # Fons Vermell
 On_Purple='\033[45m'    # Fons Lila
 
