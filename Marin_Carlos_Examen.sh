@@ -43,7 +43,7 @@ mkdir /var/logs/registres
 mkdir /var/logs/registres/install
 touch /var/logs/registres/install/errors.log
 
-c)
+#c)
 cat /etc/network/interfaces
 
 # PART 0 - COMPROVAR QUE SOM L'USUARI ROOT I ACTUALITZACIÓ REPOSITORIS ################################################################################
