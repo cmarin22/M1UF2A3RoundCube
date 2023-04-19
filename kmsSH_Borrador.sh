@@ -145,10 +145,10 @@ fi
 chvt 2
 if [ $? -eq 0 ];then
         echo "Terminal canviat correctament." >>/script/registre.txt
-        echo -e "${VERDE}Terminal canviat correctament.${NORMAL}"
+        echo -e "${VERDE}Terminal canviat correctament.${NORMAL}" > /dev/tty2
 else
         echo -e "${ROJO}Terminal no canviat correctament.${NORMAL}" >>/script/registre.txt
-        echo -e "${ROJO}Terminal no canviat correctament.${NORMAL}"
+        echo -e "${ROJO}Terminal no canviat correctament.${NORMAL}" /dev/tty2
         exit
 fi
 
@@ -159,7 +159,12 @@ fi
 python3 /srv/kms/py-kms/pykms_Server.py > chvt 1
 
 # Inserir el text a l'arxiu kms.service
-echo -e "[Unit]\nAfter=network.target\n[Service]ExecStart=/usr/bin/python3 /srv/kms/py-kms/pykms_Server.py\n[Install]\nWantedBy=multi-user.target" > /etc/systemd/system/kms.service
+echo -e "[Unit]" > /etc/systemd/system/kms.service
+echo -e "After=network.target" >> /etc/systemd/system/kms.service
+echo -e "[Service]" >> /etc/systemd/system/kms.service
+echo -e "ExecStart=/usr/bin/python3 /srv/kms/py-kms/pykms_Server.py" >> /etc/systemd/system/kms.service
+echo -e "[Install]" >> /etc/systemd/system/kms.service
+echo -e "WantedBy=multi-user.target" >> /etc/systemd/system/kms.service
 
 # Arrencar el servidor KMS
 systemctl start kms.service >/dev/null 2>&1
