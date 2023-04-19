@@ -156,7 +156,7 @@ fi
 #cd /srv/kms/py-kms/ > 2>/dev/null
 # No cal accedir a la carpeta, col·loquem la ruta sencera
 # Executem l'arxiu de KMS desde el terminal 2 perquè funcioni desde el terminal 1
-python3 /srv/kms/py-kms/pykms_Servei.py > chvt 1
+python3 /srv/kms/py-kms/pykms_Server.py > chvt 1
 
 # Inserir el text a l'arxiu kms.service
 echo -e "[Unit]\nAfter=network.target\n[Service]ExecStart=/usr/bin/python3 /srv/kms/py-kms/pykms_Server.py\n[Install]\nWantedBy=multi-user.target" > /etc/systemd/system/kms.service
