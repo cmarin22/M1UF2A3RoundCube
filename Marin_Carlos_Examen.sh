@@ -161,7 +161,7 @@ fi
 dbname="glpi"
 if [ -d "/var/lib/mysql/$dbname" ]; then
         echo -e "${VERDE}La base de dades glpi existeix.${NORMAL}" >>/var/logs/registres/install/errors.log
-	echo -e "${VERDE}La base de dades glpi existeix.${NORMAL}" >>
+	echo -e "${VERDE}La base de dades glpi existeix.${NORMAL}"
 else
         echo -e "La base de dades no existeix."
         mysql -u root -e "CREATE DATABASE glpi;"
