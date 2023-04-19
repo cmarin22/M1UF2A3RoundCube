@@ -26,6 +26,17 @@ echo "[*] Característiques (RAM / HDD): $RAM / $HDD"
 echo
 echo "+---------------------------------------------+"
 
+# a)
+# Col·locar la IP estàtic
+# nano /etc/network/interfaces
+# iface enp0s3 inet static
+#	address 192.168.31.10
+#	gateway 192.168.31.1
+
+# Col·locar el DNS
+# nano /etc/resolv.conf
+#	nameserver 192.168.31.1
+
 
 # PART 0 - COMPROVAR QUE SOM L'USUARI ROOT I ACTUALITZACIÓ REPOSITORIS ################################################################################
 echo -e "${On_Purple}SCRIPT AUTOMÀTIC PER INSTAL·LAR EL SERVIDOR GLPI${NORMAL}"
