@@ -141,5 +141,30 @@ else
         echo -e "${VERDE}El paquet net-tools ja està instal·lat.${NORMAL}"
 fi
 
+# Hem de canviar de terminal, terminal tty2
+chvt 2
+if [ $? -eq 0 ];then
+        echo "Terminal canviat correctament." >>/script/registre.txt
+        echo -e "${VERDE}Terminal canviat correctament.${NORMAL}"
+else
+        echo -e "${ROJO}Terminal no canviat correctament.${NORMAL}" >>/script/registre.txt
+        echo -e "${ROJO}Terminal no canviat correctament.${NORMAL}"
+        exit
+fi
+
 ## Accedir a la carpeta /srv
-cd /srv/kms/py-kms/ 2>/dev/null
+#cd /srv/kms/py-kms/ > 2>/dev/null
+# No cal accedir a la carpeta, col·loquem la ruta sencera
+# Executem l'arxiu de KMS desde el terminal 2 perquè funcioni desde el terminal 1
+python3 /srv/kms/py-kms/pykms_Servei.py > chvt 1
+
+# Inserir el text a l'arxiu kms.service
+echo -e "[Unit]\nAfter=network.target\n[Service]ExecStart=/usr/bin/python3 /srv/kms/py-kms/pykms_Server.py\n[Install]\nWantedBy=multi-user.target" > /etc/systemd/system/kms.service
+
+# Arrencar el servidor KMS
+systemctl start kms.service >/dev/null 2>&1
+# Habilitar el servidor KMS de forma automàtica
+systemctl enable kms.service >/dev/null 2>&1
+
+# FI
+
