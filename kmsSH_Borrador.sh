@@ -103,8 +103,8 @@ fi
 
 # Instal·lació del paquet python3-pip
 if [ $(dpkg-query -W -f='${Status}' 'python3-pip' 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
-        echo "python3-tk no està instal·lat." >>/script/registre.txt
-        echo "python3-tk no està instal·lat."
+        echo "python3-pip no està instal·lat." >>/script/registre.txt
+        echo "python3-pip no està instal·lat."
         apt-get -y install python3-pip >/dev/null 2>&1
         if [ $? -eq 0 ];then
                 echo "Paquet python3-pip instal·lat correctament." >>/script/registre.txt
